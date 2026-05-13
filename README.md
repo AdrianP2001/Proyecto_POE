@@ -15,7 +15,7 @@ Este es el proyecto base para la aplicación de **Gestión de Red de Tutorías A
 2. Abrir la solución `TutoriasApp.sln` en Visual Studio.
 3. Actualizar la cadena de conexión en el archivo `App.config` si es necesario.
 
-## Módulo: Gestión de Horarios y Sesiones (Líder)
+## Módulo: Gestión de Horarios y Sesiones 
 
 Este módulo permite:
 - Registrar el cronograma de tutorías.
