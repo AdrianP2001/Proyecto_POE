@@ -45,7 +45,7 @@ namespace TutoriasApp.Datos
                             Fecha = (DateTime)reader["Fecha"],
                             HoraInicio = (TimeSpan)reader["HoraInicio"],
                             HoraFin = (TimeSpan)reader["HoraFin"],
-                            Ubicacion = reader["Ubicacion"].ToString(),
+                            Ubicacion = reader["Ubicacion"]?.ToString() ?? string.Empty,
                             OrdenSecuencial = (int)reader["OrdenSecuencial"]
                         });
                     }
