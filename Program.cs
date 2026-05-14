@@ -1,6 +1,6 @@
 using System;
 using System.Windows.Forms;
-using Proyecto_POE.Presentacion.GestionSesiones;
+using Proyecto_POE.Presentacion;
 
 namespace Proyecto_POE
 {
@@ -11,7 +11,7 @@ namespace Proyecto_POE
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmGestionSesiones());
+            Application.Run(new FrmMenuPrincipal());
         }
     }
 }

@@ -2,7 +2,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace TutoriasApp.Presentacion
+namespace Proyecto_POE.Presentacion
 {
     public partial class FrmMenuPrincipal : Form
     {
@@ -18,8 +18,9 @@ namespace TutoriasApp.Presentacion
 
         private void btnGestionSesiones_Click(object sender, EventArgs e)
         {
-            var frm = new FrmGestionSesiones();
-            frm.Show();
+            MessageBox.Show("Este módulo se desarrolla en otra rama.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // var frm = new FrmGestionSesiones();
+            // frm.Show();
         }
 
         private void btnModuloEstudiante_Click(object sender, EventArgs e)

@@ -1,4 +1,4 @@
-namespace TutoriasApp.Presentacion
+namespace Proyecto_POE.Presentacion
 {
     partial class FrmEstudiante
     {

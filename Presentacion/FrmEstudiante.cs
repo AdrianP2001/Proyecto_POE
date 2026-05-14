@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using TutoriasApp.Entidades;
-using TutoriasApp.Negocio;
+using Proyecto_POE.Entidades;
+using Proyecto_POE.Negocio;
 
-namespace TutoriasApp.Presentacion
+namespace Proyecto_POE.Presentacion
 {
     public partial class FrmEstudiante : Form
     {
         // Managers de negocio
-        private readonly ConsultaTutoriasManager _consultaManager = new ConsultaTutoriasManager();
-        private readonly CalendarioManager _calendarioManager = new CalendarioManager();
-        private readonly GaleriaManager _galeriaManager = new GaleriaManager();
-        private readonly FeedbackManager _feedbackManager = new FeedbackManager();
+        private readonly GestorAsignaturas _asignaturasManager = new GestorAsignaturas();
+        private readonly GestorActividades _actividadesManager = new GestorActividades();
+        private readonly GestorGaleria _galeriaManager = new GestorGaleria();
+        private readonly GestorFeedback _feedbackManager = new GestorFeedback();
+        private readonly GestorTutorias _tutoriasManager = new GestorTutorias();
 
         public FrmEstudiante()
         {
@@ -34,53 +35,45 @@ namespace TutoriasApp.Presentacion
         // ============================================================
         private void CargarConsultaTutorias()
         {
-            var grupos = _consultaManager.ObtenerTodos();
+            var asignaturas = _asignaturasManager.ListarAsignaturas();
             lstGrupos.Items.Clear();
-            lstGrupos.Tag = grupos;
-            foreach (var g in grupos)
-                lstGrupos.Items.Add(g);
+            
+            lstGrupos.DisplayMember = "Nombre";
+            lstGrupos.ValueMember = "IdAsignatura";
+
+            foreach (var a in asignaturas)
+                lstGrupos.Items.Add(a);
         }
 
         private void lstGrupos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lstGrupos.SelectedItem is GrupoEstudio seleccionado)
-                MostrarDetalleGrupo(seleccionado.IdGrupo);
+            if (lstGrupos.SelectedItem is Asignatura seleccionado)
+                MostrarDetalleAsignatura(seleccionado.IdAsignatura, seleccionado.Nombre);
         }
 
-        private void MostrarDetalleGrupo(int idGrupo)
+        private void MostrarDetalleAsignatura(int idAsignatura, string nombreMateria)
         {
-            var detalle = _consultaManager.ObtenerDetalleCompleto(idGrupo);
-            if (detalle == null) return;
+            lblNombreMateria.Text = nombreMateria;
+            txtDescripcionGrupo.Text = $"Asignatura: {nombreMateria}";
 
-            lblNombreMateria.Text = detalle.NombreMateria;
-            txtDescripcionGrupo.Text = detalle.Descripcion;
-
-            // Tutores
+            // Tutores (Por ahora mostramos todos los tutores)
             lstTutores.Items.Clear();
-            foreach (var t in detalle.Tutores)
-                lstTutores.Items.Add($"👤 {t.Nombre}  |  {t.Especialidad}  |  {t.Email}");
+            var tutores = _tutoriasManager.ListarTutores();
+            foreach (var t in tutores)
+                lstTutores.Items.Add($"👤 {t.Nombres} {t.Apellidos}  |  {t.Especialidad}");
 
             // Horarios
             lstHorarios.Items.Clear();
-            foreach (var s in detalle.Horarios)
-                lstHorarios.Items.Add($"📅 {s.Fecha:dd/MM/yyyy}   🕐 {s.HoraInicio:hh\\:mm} – {s.HoraFin:hh\\:mm}   📍 {s.Ubicacion}");
+            lstHorarios.Items.Add("📅 Horarios pendientes de asignar");
 
             // Recursos
             lstRecursos.Items.Clear();
-            foreach (var r in detalle.Recursos)
-                lstRecursos.Items.Add($"🔗 {r.Descripcion}");
-
-            lstRecursos.Tag = detalle.Recursos;
+            lstRecursos.Items.Add("🔗 Recursos bibliográficos en la plataforma virtual.");
         }
 
         private void lstRecursos_DoubleClick(object sender, EventArgs e)
         {
-            if (lstRecursos.Tag is List<Recurso> recursos && lstRecursos.SelectedIndex >= 0)
-            {
-                var recurso = recursos[lstRecursos.SelectedIndex];
-                try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(recurso.Url) { UseShellExecute = true }); }
-                catch { MessageBox.Show("No se pudo abrir el enlace.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
-            }
+            // Omitido
         }
 
         // ============================================================
@@ -88,35 +81,41 @@ namespace TutoriasApp.Presentacion
         // ============================================================
         private void CargarCalendario()
         {
-            var facultades = _calendarioManager.ObtenerFacultades();
+            var asignaturas = _asignaturasManager.ListarAsignaturas();
             cmbFacultadFiltro.Items.Clear();
-            cmbFacultadFiltro.Items.Add(new Facultad { IdFacultad = 0, Nombre = "— Todas las Facultades —" });
-            foreach (var f in facultades)
-                cmbFacultadFiltro.Items.Add(f);
+            cmbFacultadFiltro.Items.Add(new Asignatura { IdAsignatura = 0, Nombre = "— Todas las Asignaturas —" });
+            cmbFacultadFiltro.DisplayMember = "Nombre";
+
+            foreach (var a in asignaturas)
+                cmbFacultadFiltro.Items.Add(a);
+            
             cmbFacultadFiltro.SelectedIndex = 0;
             ActualizarAgenda(null);
         }
 
         private void cmbFacultadFiltro_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int? idFac = null;
-            if (cmbFacultadFiltro.SelectedItem is Facultad f && f.IdFacultad > 0)
-                idFac = f.IdFacultad;
-            ActualizarAgenda(idFac);
+            int? idAsignatura = null;
+            if (cmbFacultadFiltro.SelectedItem is Asignatura a && a.IdAsignatura > 0)
+                idAsignatura = a.IdAsignatura;
+            ActualizarAgenda(idAsignatura);
         }
 
-        private void ActualizarAgenda(int? idFacultad)
+        private void ActualizarAgenda(int? idAsignatura)
         {
-            var grupos = _calendarioManager.ObtenerAgenda(idFacultad);
             dgvCalendario.DataSource = null;
             var tabla = new System.Data.DataTable();
-            tabla.Columns.Add("Materia");
-            tabla.Columns.Add("Descripción del Grupo");
-            tabla.Columns.Add("Cupo");
+            tabla.Columns.Add("Título");
+            tabla.Columns.Add("Descripción");
+            tabla.Columns.Add("Fecha de Vencimiento");
 
-            foreach (var g in grupos)
-                tabla.Rows.Add(g.NombreMateria, g.Descripcion, g.Cupo);
-
+            if (idAsignatura.HasValue)
+            {
+                var actividades = _actividadesManager.ListarActividadesPorAsignatura(idAsignatura.Value);
+                foreach (var act in actividades)
+                    tabla.Rows.Add(act.Titulo, act.Descripcion, act.FechaVencimiento?.ToString("dd/MM/yyyy") ?? "Sin límite");
+            }
+            
             dgvCalendario.DataSource = tabla;
             dgvCalendario.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -149,14 +148,14 @@ namespace TutoriasApp.Presentacion
                     Margin = new Padding(6)
                 };
 
-                string ruta = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, foto.RutaImagen);
+                string ruta = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, foto.RutaLocal);
                 if (File.Exists(ruta))
                     pb.Image = Image.FromFile(ruta);
                 else
                     pb.BackColor = Color.FromArgb(230, 235, 245);
 
                 var tooltip = new ToolTip();
-                tooltip.SetToolTip(pb, foto.Descripcion);
+                tooltip.SetToolTip(pb, foto.Titulo);
                 pb.Click += (s, e) => MostrarFotoAmpliada((PictureBox)s!);
                 flowGaleria.Controls.Add(pb);
             }
@@ -166,8 +165,8 @@ namespace TutoriasApp.Presentacion
         {
             if (pb.Image == null) return;
             picVistaPrevia.Image = pb.Image;
-            if (pb.Tag is FotoSesion f)
-                lblDescripcionFoto.Text = f.Descripcion;
+            if (pb.Tag is ImagenGaleria f)
+                lblDescripcionFoto.Text = f.Titulo;
         }
 
         // ============================================================
@@ -175,20 +174,21 @@ namespace TutoriasApp.Presentacion
         // ============================================================
         private void CargarFeedback()
         {
-            // Cargar tutores en ComboBox de votación
-            var tutores = new TutorDAO_Helper(_feedbackManager).ObtenerTodos();
+            var tutores = _tutoriasManager.ListarTutores();
             cmbTutoresVoto.Items.Clear();
+            cmbTutoresVoto.DisplayMember = "Nombres";
             foreach (var t in tutores)
                 cmbTutoresVoto.Items.Add(t);
+                
             if (cmbTutoresVoto.Items.Count > 0)
                 cmbTutoresVoto.SelectedIndex = 0;
 
-            // Cargar grupos en ComboBox de comentarios (opcional)
-            var grupos = _consultaManager.ObtenerTodos();
+            var asignaturas = _asignaturasManager.ListarAsignaturas();
             cmbGrupoComentario.Items.Clear();
-            cmbGrupoComentario.Items.Add(new GrupoEstudio { IdGrupo = 0, NombreMateria = "Sin grupo específico", Descripcion = "" });
-            foreach (var g in grupos)
-                cmbGrupoComentario.Items.Add(g);
+            cmbGrupoComentario.DisplayMember = "Nombre";
+            cmbGrupoComentario.Items.Add(new Asignatura { IdAsignatura = 0, Nombre = "Sin asignatura específica" });
+            foreach (var a in asignaturas)
+                cmbGrupoComentario.Items.Add(a);
             cmbGrupoComentario.SelectedIndex = 0;
 
             ActualizarTutorDelMes();
@@ -196,36 +196,36 @@ namespace TutoriasApp.Presentacion
 
         private void ActualizarTutorDelMes()
         {
-            var tutor = _feedbackManager.ObtenerTutorDelMes();
-            if (tutor != null)
-            {
-                lblTutorDelMesNombre.Text = tutor.Nombre;
-                lblTutorDelMesEspecialidad.Text = tutor.Especialidad;
-                lblTutorDelMesPromedio.Text = $"⭐ {tutor.PromedioVotos:F1} / 5.0";
-            }
-            else
-            {
-                lblTutorDelMesNombre.Text = "Sin votos este mes";
-                lblTutorDelMesEspecialidad.Text = "";
-                lblTutorDelMesPromedio.Text = "";
-            }
+            lblTutorDelMesNombre.Text = "Próximamente";
+            lblTutorDelMesEspecialidad.Text = "";
+            lblTutorDelMesPromedio.Text = "";
         }
 
         private void btnEnviarComentario_Click(object sender, EventArgs e)
         {
-            int? idGrupo = null;
-            if (cmbGrupoComentario.SelectedItem is GrupoEstudio g && g.IdGrupo > 0)
-                idGrupo = g.IdGrupo;
-
-            string rpta = _feedbackManager.RegistrarComentario(txtNombreEstudiante.Text, txtComentario.Text, idGrupo);
-            if (rpta == "OK")
+            int idSesion = 1; 
+            
+            try
             {
+                var f = new Feedback
+                {
+                    IdEstudiante = 1,
+                    IdSesion = idSesion,
+                    Calificacion = 5,
+                    Comentarios = txtComentario.Text,
+                    FechaRegistro = DateTime.Now,
+                    Activo = true
+                };
+
+                _feedbackManager.RegistrarFeedback(f);
                 MessageBox.Show("✅ Comentario enviado. ¡Gracias por tu feedback!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtNombreEstudiante.Clear();
                 txtComentario.Clear();
             }
-            else
-                MessageBox.Show(rpta, "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnVotar_Click(object sender, EventArgs e)
@@ -243,27 +243,32 @@ namespace TutoriasApp.Presentacion
             else if (rb4Estrellas.Checked) estrellas = 4;
             else if (rb5Estrellas.Checked) estrellas = 5;
 
-            string rpta = _feedbackManager.VotarTutor(tutor.IdTutor, estrellas);
-            if (rpta == "OK")
+            if (estrellas == 0)
             {
-                MessageBox.Show($"✅ Voto registrado: {estrellas} estrella(s) para {tutor.Nombre}.", "Voto Registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Por favor, seleccione una cantidad de estrellas.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                var f = new Feedback
+                {
+                    IdEstudiante = 1,
+                    IdSesion = 1, 
+                    Calificacion = estrellas,
+                    Comentarios = "Votación directa al tutor",
+                    FechaRegistro = DateTime.Now,
+                    Activo = true
+                };
+                
+                _feedbackManager.RegistrarFeedback(f);
+                MessageBox.Show($"✅ Voto registrado: {estrellas} estrella(s) para {tutor.Nombres}.", "Voto Registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ActualizarTutorDelMes();
             }
-            else
-                MessageBox.Show(rpta, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-
-        // Helper interno para obtener tutores en feedback sin romper la capa
-        private class TutorDAO_Helper
-        {
-            private readonly FeedbackManager _fm;
-            public TutorDAO_Helper(FeedbackManager fm) { _fm = fm; }
-            public List<Tutor> ObtenerTodos() => new TutorDAO_Direct().Listar();
-        }
-
-        private class TutorDAO_Direct
-        {
-            public List<Tutor> Listar() => new Datos.TutorDAO().Listar();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }
