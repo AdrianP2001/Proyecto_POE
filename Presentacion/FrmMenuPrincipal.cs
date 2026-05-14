@@ -13,7 +13,7 @@ namespace Proyecto_POE.Presentacion
 
         private void FrmMenuPrincipal_Load(object sender, EventArgs e)
         {
-            // No hace falta cargar datos en el menú
+            // No hace falta cargar datos en el menu
         }
 
         private void btnGestionSesiones_Click(object sender, EventArgs e)

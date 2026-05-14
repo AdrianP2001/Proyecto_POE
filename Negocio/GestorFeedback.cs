@@ -12,12 +12,12 @@ namespace Proyecto_POE.Negocio
         {
             if (feedback.Calificacion < 1 || feedback.Calificacion > 5)
             {
-                throw new ArgumentException("La calificación debe estar entre 1 y 5.");
+                throw new ArgumentException("La calificacion debe estar entre 1 y 5.");
             }
 
             if (string.IsNullOrWhiteSpace(feedback.Comentarios))
             {
-                throw new ArgumentException("Los comentarios no pueden estar vacíos.");
+                throw new ArgumentException("Los comentarios no pueden estar vacios.");
             }
 
             _feedbackDAO.InsertarFeedback(feedback);

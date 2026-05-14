@@ -12,7 +12,7 @@ namespace Proyecto_POE.Negocio
         public List<Actividad> ListarActividadesPorAsignatura(int idAsignatura)
         {
             if (idAsignatura <= 0)
-                throw new ArgumentException("Id de asignatura inválido.");
+                throw new ArgumentException("Id de asignatura invalido.");
 
             return _actividadDAO.ObtenerActividades(idAsignatura);
         }

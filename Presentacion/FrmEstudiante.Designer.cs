@@ -379,7 +379,7 @@ namespace Proyecto_POE.Presentacion
             this.tabFeedback.Name = "tabFeedback";
             this.tabFeedback.Size = new System.Drawing.Size(976, 531);
             this.tabFeedback.TabIndex = 3;
-            this.tabFeedback.Text = "Interacción y Feedback";
+            this.tabFeedback.Text = "Interaccion y Feedback";
             this.tabFeedback.UseVisualStyleBackColor = true;
             // 
             // groupBoxVotacion

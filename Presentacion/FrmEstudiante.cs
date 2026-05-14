@@ -31,7 +31,7 @@ namespace Proyecto_POE.Presentacion
         }
 
         // ============================================================
-        // TAB 1 — CONSULTA DE TUTORÍAS
+        // TAB 1 — CONSULTA DE TUTORIAS
         // ============================================================
         private void CargarConsultaTutorias()
         {
@@ -68,7 +68,7 @@ namespace Proyecto_POE.Presentacion
 
             // Recursos
             lstRecursos.Items.Clear();
-            lstRecursos.Items.Add("🔗 Recursos bibliográficos en la plataforma virtual.");
+            lstRecursos.Items.Add("🔗 Recursos bibliograficos en la plataforma virtual.");
         }
 
         private void lstRecursos_DoubleClick(object sender, EventArgs e)
@@ -105,15 +105,15 @@ namespace Proyecto_POE.Presentacion
         {
             dgvCalendario.DataSource = null;
             var tabla = new System.Data.DataTable();
-            tabla.Columns.Add("Título");
-            tabla.Columns.Add("Descripción");
+            tabla.Columns.Add("Titulo");
+            tabla.Columns.Add("Descripcion");
             tabla.Columns.Add("Fecha de Vencimiento");
 
             if (idAsignatura.HasValue)
             {
                 var actividades = _actividadesManager.ListarActividadesPorAsignatura(idAsignatura.Value);
                 foreach (var act in actividades)
-                    tabla.Rows.Add(act.Titulo, act.Descripcion, act.FechaVencimiento?.ToString("dd/MM/yyyy") ?? "Sin límite");
+                    tabla.Rows.Add(act.Titulo, act.Descripcion, act.FechaVencimiento?.ToString("dd/MM/yyyy") ?? "Sin limite");
             }
             
             dgvCalendario.DataSource = tabla;
@@ -121,7 +121,7 @@ namespace Proyecto_POE.Presentacion
         }
 
         // ============================================================
-        // TAB 3 — GALERÍA DE FOTOS
+        // TAB 3 — GALERIA DE FOTOS
         // ============================================================
         private void CargarGaleria()
         {
@@ -170,7 +170,7 @@ namespace Proyecto_POE.Presentacion
         }
 
         // ============================================================
-        // TAB 4 — FEEDBACK Y VALORACIÓN
+        // TAB 4 — FEEDBACK Y VALORACION
         // ============================================================
         private void CargarFeedback()
         {
@@ -186,7 +186,7 @@ namespace Proyecto_POE.Presentacion
             var asignaturas = _asignaturasManager.ListarAsignaturas();
             cmbGrupoComentario.Items.Clear();
             cmbGrupoComentario.DisplayMember = "Nombre";
-            cmbGrupoComentario.Items.Add(new Asignatura { IdAsignatura = 0, Nombre = "Sin asignatura específica" });
+            cmbGrupoComentario.Items.Add(new Asignatura { IdAsignatura = 0, Nombre = "Sin asignatura especifica" });
             foreach (var a in asignaturas)
                 cmbGrupoComentario.Items.Add(a);
             cmbGrupoComentario.SelectedIndex = 0;
@@ -256,7 +256,7 @@ namespace Proyecto_POE.Presentacion
                     IdEstudiante = 1,
                     IdSesion = 1, 
                     Calificacion = estrellas,
-                    Comentarios = "Votación directa al tutor",
+                    Comentarios = "Votacion directa al tutor",
                     FechaRegistro = DateTime.Now,
                     Activo = true
                 };
