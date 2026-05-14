@@ -11,7 +11,7 @@ namespace TutoriasApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmGestionSesiones());
+            Application.Run(new FrmMenuPrincipal());
         }
     }
 }
