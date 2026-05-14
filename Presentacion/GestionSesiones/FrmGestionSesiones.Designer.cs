@@ -1,4 +1,4 @@
-namespace TutoriasApp.Presentacion.GestionSesiones
+namespace Proyecto_POE.Presentacion.GestionSesiones
 {
     partial class FrmGestionSesiones
     {

@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using TutoriasApp.Datos;
-using TutoriasApp.Entidades.GestionSesiones;
+using Proyecto_POE.Datos;
+using Proyecto_POE.Entidades.GestionSesiones;
 
-namespace TutoriasApp.Datos.GestionSesiones
+namespace Proyecto_POE.Datos.GestionSesiones
 {
     public class SesionDAO
     {

@@ -6,8 +6,8 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyName>ProyectoFinalTutorias</AssemblyName>
-    <RootNamespace>TutoriasApp</RootNamespace>
+    <AssemblyName>Proyecto_POE</AssemblyName>
+    <RootNamespace>Proyecto_POE</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

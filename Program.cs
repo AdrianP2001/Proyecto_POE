@@ -1,8 +1,8 @@
 using System;
 using System.Windows.Forms;
-using TutoriasApp.Presentacion.GestionSesiones;
+using Proyecto_POE.Presentacion.GestionSesiones;
 
-namespace TutoriasApp
+namespace Proyecto_POE
 {
     static class Program
     {

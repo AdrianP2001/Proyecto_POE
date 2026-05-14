@@ -1,6 +1,6 @@
 using System;
 
-namespace TutoriasApp.Entidades.GestionSesiones
+namespace Proyecto_POE.Entidades.GestionSesiones
 {
     public class Sesion
     {
