@@ -1,7 +1,7 @@
 using System.Configuration;
 using System.Data.SqlClient;
 
-namespace TutoriasApp.Datos
+namespace Proyecto_POE.Datos
 {
     public class ConexionBD
     {

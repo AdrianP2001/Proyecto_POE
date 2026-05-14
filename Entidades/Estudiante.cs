@@ -2,15 +2,16 @@ using System;
 
 namespace Proyecto_POE.Entidades
 {
-    public class Tutor
+    public class Estudiante
     {
-        public int IdTutor { get; set; }
+        public int IdEstudiante { get; set; }
+        public string Matricula { get; set; }
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
-        public string Especialidad { get; set; }
+        public string Email { get; set; }
         public bool Activo { get; set; }
 
-        public Tutor()
+        public Estudiante()
         {
             Activo = true;
         }

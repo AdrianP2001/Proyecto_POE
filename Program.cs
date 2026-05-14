@@ -1,8 +1,8 @@
 using System;
 using System.Windows.Forms;
-using TutoriasApp.Presentacion;
+using Proyecto_POE.Presentacion.GestionSesiones;
 
-namespace TutoriasApp
+namespace Proyecto_POE
 {
     static class Program
     {
@@ -11,7 +11,7 @@ namespace TutoriasApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmMenuPrincipal());
+            Application.Run(new FrmGestionSesiones());
         }
     }
 }
