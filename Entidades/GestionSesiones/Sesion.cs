@@ -1,6 +1,6 @@
 using System;
 
-namespace TutoriasApp.Entidades
+namespace TutoriasApp.Entidades.GestionSesiones
 {
     public class Sesion
     {

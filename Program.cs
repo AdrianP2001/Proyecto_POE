@@ -1,6 +1,6 @@
 using System;
 using System.Windows.Forms;
-using TutoriasApp.Presentacion;
+using TutoriasApp.Presentacion.GestionSesiones;
 
 namespace TutoriasApp
 {

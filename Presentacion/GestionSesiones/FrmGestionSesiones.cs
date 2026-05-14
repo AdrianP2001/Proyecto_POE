@@ -1,9 +1,9 @@
 using System;
 using System.Windows.Forms;
-using TutoriasApp.Entidades;
-using TutoriasApp.Negocio;
+using TutoriasApp.Entidades.GestionSesiones;
+using TutoriasApp.Negocio.GestionSesiones;
 
-namespace TutoriasApp.Presentacion
+namespace TutoriasApp.Presentacion.GestionSesiones
 {
     public partial class FrmGestionSesiones : Form
     {
