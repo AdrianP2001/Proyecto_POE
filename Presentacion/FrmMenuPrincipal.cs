@@ -18,7 +18,7 @@ namespace Proyecto_POE.Presentacion
 
         private void btnGestionSesiones_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Este módulo se desarrolla en otra rama.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Este modulo se desarrolla en otra rama.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
             // var frm = new FrmGestionSesiones();
             // frm.Show();
         }

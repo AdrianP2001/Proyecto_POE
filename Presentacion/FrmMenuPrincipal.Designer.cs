@@ -43,7 +43,7 @@ namespace Proyecto_POE.Presentacion
             lblSubtitulo.Name = "lblSubtitulo";
             lblSubtitulo.Size = new Size(680, 40);
             lblSubtitulo.TabIndex = 0;
-            lblSubtitulo.Text = "Proyecto Final POE 2026  —  Seleccione un módulo";
+            lblSubtitulo.Text = "Proyecto Final POE 2026  —  Seleccione un modulo";
             lblSubtitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblTitulo
@@ -55,7 +55,7 @@ namespace Proyecto_POE.Presentacion
             lblTitulo.Name = "lblTitulo";
             lblTitulo.Size = new Size(680, 60);
             lblTitulo.TabIndex = 1;
-            lblTitulo.Text = "🎓  Sistema de Tutorías";
+            lblTitulo.Text = "🎓  Sistema de Tutorias";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pnlBotones
@@ -81,7 +81,7 @@ namespace Proyecto_POE.Presentacion
             btnGestionSesiones.Name = "btnGestionSesiones";
             btnGestionSesiones.Size = new Size(240, 160);
             btnGestionSesiones.TabIndex = 0;
-            btnGestionSesiones.Text = "📅\r\n\r\nGestión de\r\nSesiones";
+            btnGestionSesiones.Text = "📅\r\n\r\nGestion de\r\nSesiones";
             btnGestionSesiones.UseVisualStyleBackColor = false;
             btnGestionSesiones.Click += btnGestionSesiones_Click;
             // 
@@ -98,7 +98,7 @@ namespace Proyecto_POE.Presentacion
             btnModuloEstudiante.Name = "btnModuloEstudiante";
             btnModuloEstudiante.Size = new Size(240, 160);
             btnModuloEstudiante.TabIndex = 1;
-            btnModuloEstudiante.Text = "👨‍🎓\r\n\r\nMódulo\r\nEstudiante";
+            btnModuloEstudiante.Text = "👨‍🎓\r\n\r\nModulo\r\nEstudiante";
             btnModuloEstudiante.UseVisualStyleBackColor = false;
             btnModuloEstudiante.Click += btnModuloEstudiante_Click;
             // 
@@ -129,7 +129,7 @@ namespace Proyecto_POE.Presentacion
             MaximizeBox = false;
             Name = "FrmMenuPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Sistema de Tutorías — Menú Principal";
+            Text = "Sistema de Tutorias — Menu Principal";
             Load += FrmMenuPrincipal_Load;
             Paint += FrmMenuPrincipal_Paint;
             pnlHeader.ResumeLayout(false);

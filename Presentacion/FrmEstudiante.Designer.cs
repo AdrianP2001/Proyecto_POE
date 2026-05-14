@@ -108,7 +108,7 @@ namespace Proyecto_POE.Presentacion
             this.tabTutorias.Padding = new System.Windows.Forms.Padding(3);
             this.tabTutorias.Size = new System.Drawing.Size(976, 531);
             this.tabTutorias.TabIndex = 0;
-            this.tabTutorias.Text = "Consulta de Tutorías";
+            this.tabTutorias.Text = "Consulta de Tutorias";
             this.tabTutorias.UseVisualStyleBackColor = true;
             // 
             // splitContainer1
@@ -310,7 +310,7 @@ namespace Proyecto_POE.Presentacion
             this.tabGaleria.Name = "tabGaleria";
             this.tabGaleria.Size = new System.Drawing.Size(976, 531);
             this.tabGaleria.TabIndex = 2;
-            this.tabGaleria.Text = "Galería de Sesiones";
+            this.tabGaleria.Text = "Galeria de Sesiones";
             this.tabGaleria.UseVisualStyleBackColor = true;
             // 
             // splitContainer2
@@ -348,7 +348,7 @@ namespace Proyecto_POE.Presentacion
             this.lblGaleriaMensaje.Name = "lblGaleriaMensaje";
             this.lblGaleriaMensaje.Size = new System.Drawing.Size(325, 30);
             this.lblGaleriaMensaje.TabIndex = 0;
-            this.lblGaleriaMensaje.Text = "Cargando galería...";
+            this.lblGaleriaMensaje.Text = "Cargando galeria...";
             this.lblGaleriaMensaje.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblDescripcionFoto
@@ -401,7 +401,7 @@ namespace Proyecto_POE.Presentacion
             this.groupBoxVotacion.Size = new System.Drawing.Size(465, 477);
             this.groupBoxVotacion.TabIndex = 1;
             this.groupBoxVotacion.TabStop = false;
-            this.groupBoxVotacion.Text = "Valoración al Tutor";
+            this.groupBoxVotacion.Text = "Valoracion al Tutor";
             // 
             // lblTutorDelMesPromedio
             // 
@@ -615,7 +615,7 @@ namespace Proyecto_POE.Presentacion
             this.Controls.Add(this.tabControlPrincipal);
             this.Name = "FrmEstudiante";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Módulo de Estudiante - Sistema de Tutorías";
+            this.Text = "Modulo de Estudiante - Sistema de Tutorias";
             this.Load += new System.EventHandler(this.FrmEstudiante_Load);
             this.tabControlPrincipal.ResumeLayout(false);
             this.tabTutorias.ResumeLayout(false);

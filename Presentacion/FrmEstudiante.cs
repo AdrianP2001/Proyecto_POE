@@ -130,7 +130,7 @@ namespace Proyecto_POE.Presentacion
 
             if (fotos.Count == 0)
             {
-                lblGaleriaMensaje.Text = "No hay fotos registradas en la galería todavía.";
+                lblGaleriaMensaje.Text = "No hay fotos registradas en la galeria todavia.";
                 lblGaleriaMensaje.Visible = true;
                 return;
             }
@@ -196,7 +196,7 @@ namespace Proyecto_POE.Presentacion
 
         private void ActualizarTutorDelMes()
         {
-            lblTutorDelMesNombre.Text = "Próximamente";
+            lblTutorDelMesNombre.Text = "Proximamente";
             lblTutorDelMesEspecialidad.Text = "";
             lblTutorDelMesPromedio.Text = "";
         }
@@ -218,13 +218,13 @@ namespace Proyecto_POE.Presentacion
                 };
 
                 _feedbackManager.RegistrarFeedback(f);
-                MessageBox.Show("✅ Comentario enviado. ¡Gracias por tu feedback!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("✅ Comentario enviado. Gracias por tu feedback!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtNombreEstudiante.Clear();
                 txtComentario.Clear();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, "Error de Validacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
