@@ -40,5 +40,10 @@ namespace TutoriasApp.Presentacion
                 e.Graphics.FillRectangle(brush, this.ClientRectangle);
             }
         }
+
+        private void lblVersion_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

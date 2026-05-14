@@ -12,116 +12,129 @@ namespace TutoriasApp.Presentacion
 
         private void InitializeComponent()
         {
-            this.pnlHeader = new System.Windows.Forms.Panel();
-            this.lblTitulo = new System.Windows.Forms.Label();
-            this.lblSubtitulo = new System.Windows.Forms.Label();
-            this.pnlBotones = new System.Windows.Forms.Panel();
-            this.btnGestionSesiones = new System.Windows.Forms.Button();
-            this.btnModuloEstudiante = new System.Windows.Forms.Button();
-            this.lblVersion = new System.Windows.Forms.Label();
-            this.pnlHeader.SuspendLayout();
-            this.pnlBotones.SuspendLayout();
-            this.SuspendLayout();
-
+            pnlHeader = new Panel();
+            lblSubtitulo = new Label();
+            lblTitulo = new Label();
+            pnlBotones = new Panel();
+            btnGestionSesiones = new Button();
+            btnModuloEstudiante = new Button();
+            lblVersion = new Label();
+            pnlHeader.SuspendLayout();
+            pnlBotones.SuspendLayout();
+            SuspendLayout();
+            // 
             // pnlHeader
-            this.pnlHeader.BackColor = System.Drawing.Color.Transparent;
-            this.pnlHeader.Controls.Add(this.lblSubtitulo);
-            this.pnlHeader.Controls.Add(this.lblTitulo);
-            this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlHeader.Location = new System.Drawing.Point(0, 0);
-            this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(680, 140);
-
-            // lblTitulo
-            this.lblTitulo.AutoSize = false;
-            this.lblTitulo.BackColor = System.Drawing.Color.Transparent;
-            this.lblTitulo.Dock = System.Windows.Forms.DockStyle.None;
-            this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 26F, System.Drawing.FontStyle.Bold);
-            this.lblTitulo.ForeColor = System.Drawing.Color.White;
-            this.lblTitulo.Location = new System.Drawing.Point(0, 20);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(680, 60);
-            this.lblTitulo.Text = "🎓  Sistema de Tutorías";
-            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
+            // 
+            pnlHeader.BackColor = Color.Transparent;
+            pnlHeader.Controls.Add(lblSubtitulo);
+            pnlHeader.Controls.Add(lblTitulo);
+            pnlHeader.Dock = DockStyle.Top;
+            pnlHeader.Location = new Point(0, 0);
+            pnlHeader.Name = "pnlHeader";
+            pnlHeader.Size = new Size(680, 140);
+            pnlHeader.TabIndex = 1;
+            // 
             // lblSubtitulo
-            this.lblSubtitulo.AutoSize = false;
-            this.lblSubtitulo.BackColor = System.Drawing.Color.Transparent;
-            this.lblSubtitulo.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.lblSubtitulo.ForeColor = System.Drawing.Color.FromArgb(180, 210, 255);
-            this.lblSubtitulo.Location = new System.Drawing.Point(0, 82);
-            this.lblSubtitulo.Name = "lblSubtitulo";
-            this.lblSubtitulo.Size = new System.Drawing.Size(680, 40);
-            this.lblSubtitulo.Text = "Proyecto Final POE 2026  —  Seleccione un módulo";
-            this.lblSubtitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
+            // 
+            lblSubtitulo.BackColor = Color.Transparent;
+            lblSubtitulo.Font = new Font("Segoe UI", 11F);
+            lblSubtitulo.ForeColor = Color.FromArgb(180, 210, 255);
+            lblSubtitulo.Location = new Point(0, 82);
+            lblSubtitulo.Name = "lblSubtitulo";
+            lblSubtitulo.Size = new Size(680, 40);
+            lblSubtitulo.TabIndex = 0;
+            lblSubtitulo.Text = "Proyecto Final POE 2026  —  Seleccione un módulo";
+            lblSubtitulo.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblTitulo
+            // 
+            lblTitulo.BackColor = Color.Transparent;
+            lblTitulo.Font = new Font("Segoe UI", 26F, FontStyle.Bold);
+            lblTitulo.ForeColor = Color.White;
+            lblTitulo.Location = new Point(0, 20);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(680, 60);
+            lblTitulo.TabIndex = 1;
+            lblTitulo.Text = "🎓  Sistema de Tutorías";
+            lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // pnlBotones
-            this.pnlBotones.BackColor = System.Drawing.Color.Transparent;
-            this.pnlBotones.Controls.Add(this.btnGestionSesiones);
-            this.pnlBotones.Controls.Add(this.btnModuloEstudiante);
-            this.pnlBotones.Location = new System.Drawing.Point(60, 160);
-            this.pnlBotones.Name = "pnlBotones";
-            this.pnlBotones.Size = new System.Drawing.Size(560, 210);
-
+            // 
+            pnlBotones.BackColor = Color.Transparent;
+            pnlBotones.Controls.Add(btnGestionSesiones);
+            pnlBotones.Controls.Add(btnModuloEstudiante);
+            pnlBotones.Location = new Point(60, 160);
+            pnlBotones.Name = "pnlBotones";
+            pnlBotones.Size = new Size(560, 210);
+            pnlBotones.TabIndex = 0;
+            // 
             // btnGestionSesiones
-            this.btnGestionSesiones.BackColor = System.Drawing.Color.FromArgb(255, 255, 255, 30);
-            this.btnGestionSesiones.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(100, 180, 255);
-            this.btnGestionSesiones.FlatAppearance.BorderSize = 2;
-            this.btnGestionSesiones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGestionSesiones.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold);
-            this.btnGestionSesiones.ForeColor = System.Drawing.Color.White;
-            this.btnGestionSesiones.Location = new System.Drawing.Point(20, 20);
-            this.btnGestionSesiones.Name = "btnGestionSesiones";
-            this.btnGestionSesiones.Size = new System.Drawing.Size(240, 160);
-            this.btnGestionSesiones.Text = "📅\r\n\r\nGestión de\r\nSesiones";
-            this.btnGestionSesiones.UseVisualStyleBackColor = false;
-            this.btnGestionSesiones.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGestionSesiones.Click += new System.EventHandler(this.btnGestionSesiones_Click);
-
+            // 
+            btnGestionSesiones.BackColor = Color.FromArgb(255, 255, 30);
+            btnGestionSesiones.Cursor = Cursors.Hand;
+            btnGestionSesiones.FlatAppearance.BorderColor = Color.FromArgb(100, 180, 255);
+            btnGestionSesiones.FlatAppearance.BorderSize = 2;
+            btnGestionSesiones.FlatStyle = FlatStyle.Flat;
+            btnGestionSesiones.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
+            btnGestionSesiones.ForeColor = Color.White;
+            btnGestionSesiones.Location = new Point(20, 20);
+            btnGestionSesiones.Name = "btnGestionSesiones";
+            btnGestionSesiones.Size = new Size(240, 160);
+            btnGestionSesiones.TabIndex = 0;
+            btnGestionSesiones.Text = "📅\r\n\r\nGestión de\r\nSesiones";
+            btnGestionSesiones.UseVisualStyleBackColor = false;
+            btnGestionSesiones.Click += btnGestionSesiones_Click;
+            // 
             // btnModuloEstudiante
-            this.btnModuloEstudiante.BackColor = System.Drawing.Color.FromArgb(0, 120, 215);
-            this.btnModuloEstudiante.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(80, 160, 255);
-            this.btnModuloEstudiante.FlatAppearance.BorderSize = 2;
-            this.btnModuloEstudiante.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnModuloEstudiante.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold);
-            this.btnModuloEstudiante.ForeColor = System.Drawing.Color.White;
-            this.btnModuloEstudiante.Location = new System.Drawing.Point(300, 20);
-            this.btnModuloEstudiante.Name = "btnModuloEstudiante";
-            this.btnModuloEstudiante.Size = new System.Drawing.Size(240, 160);
-            this.btnModuloEstudiante.Text = "👨‍🎓\r\n\r\nMódulo\r\nEstudiante";
-            this.btnModuloEstudiante.UseVisualStyleBackColor = false;
-            this.btnModuloEstudiante.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnModuloEstudiante.Click += new System.EventHandler(this.btnModuloEstudiante_Click);
-
+            // 
+            btnModuloEstudiante.BackColor = Color.FromArgb(0, 120, 215);
+            btnModuloEstudiante.Cursor = Cursors.Hand;
+            btnModuloEstudiante.FlatAppearance.BorderColor = Color.FromArgb(80, 160, 255);
+            btnModuloEstudiante.FlatAppearance.BorderSize = 2;
+            btnModuloEstudiante.FlatStyle = FlatStyle.Flat;
+            btnModuloEstudiante.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
+            btnModuloEstudiante.ForeColor = Color.White;
+            btnModuloEstudiante.Location = new Point(300, 20);
+            btnModuloEstudiante.Name = "btnModuloEstudiante";
+            btnModuloEstudiante.Size = new Size(240, 160);
+            btnModuloEstudiante.TabIndex = 1;
+            btnModuloEstudiante.Text = "👨‍🎓\r\n\r\nMódulo\r\nEstudiante";
+            btnModuloEstudiante.UseVisualStyleBackColor = false;
+            btnModuloEstudiante.Click += btnModuloEstudiante_Click;
+            // 
             // lblVersion
-            this.lblVersion.AutoSize = false;
-            this.lblVersion.BackColor = System.Drawing.Color.Transparent;
-            this.lblVersion.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblVersion.ForeColor = System.Drawing.Color.FromArgb(120, 160, 220);
-            this.lblVersion.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(680, 30);
-            this.lblVersion.Text = "Desarrollado con C# · .NET 8 · WinForms · SQL Server";
-            this.lblVersion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
+            // 
+            lblVersion.BackColor = Color.Transparent;
+            lblVersion.Dock = DockStyle.Bottom;
+            lblVersion.Font = new Font("Segoe UI", 8F);
+            lblVersion.ForeColor = Color.FromArgb(120, 160, 220);
+            lblVersion.Location = new Point(0, 400);
+            lblVersion.Name = "lblVersion";
+            lblVersion.Size = new Size(680, 30);
+            lblVersion.TabIndex = 2;
+            lblVersion.Text = "Desarrollado con C# · .NET 8 · WinForms · SQL Server";
+            lblVersion.TextAlign = ContentAlignment.MiddleCenter;
+            lblVersion.Click += lblVersion_Click;
+            // 
             // FrmMenuPrincipal
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(15, 32, 90);
-            this.ClientSize = new System.Drawing.Size(680, 430);
-            this.Controls.Add(this.pnlBotones);
-            this.Controls.Add(this.pnlHeader);
-            this.Controls.Add(this.lblVersion);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "FrmMenuPrincipal";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Sistema de Tutorías — Menú Principal";
-            this.Load += new System.EventHandler(this.FrmMenuPrincipal_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.FrmMenuPrincipal_Paint);
-            this.pnlHeader.ResumeLayout(false);
-            this.pnlBotones.ResumeLayout(false);
-            this.ResumeLayout(false);
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(15, 32, 90);
+            ClientSize = new Size(680, 430);
+            Controls.Add(pnlBotones);
+            Controls.Add(pnlHeader);
+            Controls.Add(lblVersion);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            Name = "FrmMenuPrincipal";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Sistema de Tutorías — Menú Principal";
+            Load += FrmMenuPrincipal_Load;
+            Paint += FrmMenuPrincipal_Paint;
+            pnlHeader.ResumeLayout(false);
+            pnlBotones.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         private System.Windows.Forms.Panel pnlHeader;

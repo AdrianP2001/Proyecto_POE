@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TutoriasApp": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\adrip\\source\\repos\\Proyecto_POE"
+    }
+  }
+}
