@@ -77,7 +77,7 @@ namespace Proyecto_POE.Negocio.ResultadosGestion
                         Paragraph resumenTitle = new Paragraph();
                         Text rtText = new Text("\nResumen Ejecutivo");
                         rtText.SetProperty(Property.FONT_WEIGHT, 700);
-                        rtText.SetProperty(Property.UNDERLINE, true);
+                        rtText.SetUnderline(); // Uso de método estándar en lugar de propiedad genérica
                         resumenTitle.Add(rtText);
                         document.Add(resumenTitle);
                         
