@@ -47,7 +47,8 @@ namespace Proyecto_POE.Negocio.ResultadosGestion
 
                         // Tabla de resultados
                         float[] columnWidths = { 3, 2, 1, 1, 2 };
-                        Table table = new Table(UnitValue.CreateRelativeArray(columnWidths)).SetWidth(UnitValue.CreatePercentValue(100));
+                        Table table = new Table(columnWidths);
+                        table.SetWidth(UnitValue.CreatePercentValue(100));
 
                         // Encabezados simples (sin SetProperty que rompe)
                         table.AddHeaderCell(new Cell().Add(new Paragraph("Asignatura")));
@@ -83,7 +84,10 @@ namespace Proyecto_POE.Negocio.ResultadosGestion
             }
             catch (Exception ex)
             {
-                return "Error al generar PDF: " + ex.Message;
+                string errorDetallado = $"Error al generar PDF: {ex.Message}";
+                if (ex.InnerException != null) errorDetallado += $"\nInterno: {ex.InnerException.Message}";
+                errorDetallado += $"\nStack: {ex.StackTrace}";
+                return errorDetallado;
             }
         }
     }
