@@ -12,10 +12,6 @@ namespace Proyecto_POE
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
-            // Ejecutar diagnóstico al inicio para ayudar a los compañeros
-            DepuradorSistema.MostrarReporte();
-
             Application.Run(new FrmResultadosGestion());
         }
     }
