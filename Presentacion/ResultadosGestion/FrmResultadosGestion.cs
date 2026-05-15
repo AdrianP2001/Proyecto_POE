@@ -51,7 +51,12 @@ namespace Proyecto_POE.Presentacion.ResultadosGestion
                 string resultado = manager.GenerarInformePDF(sfd.FileName);
                 if (resultado == "OK")
                 {
-                    MessageBox.Show("Informe exportado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Informe exportado correctamente. Se abrirá a continuación.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    try
+                    {
+                        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(sfd.FileName) { UseShellExecute = true });
+                    }
+                    catch { /* No hacer nada si no se puede abrir el visor de PDF */ }
                 }
                 else
                 {

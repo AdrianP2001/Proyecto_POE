@@ -33,14 +33,10 @@ namespace Proyecto_POE.Negocio.ResultadosGestion
                         document.SetMargins(36, 36, 36, 36);
 
                         // Título
-                        Paragraph header = new Paragraph()
+                        Paragraph header = new Paragraph("INFORME DE GESTIÓN Y RESULTADOS DE TUTORÍAS")
                             .SetTextAlignment(TextAlignment.CENTER)
                             .SetFontSize(18)
                             .SetFontColor(ColorConstants.BLUE);
-                        
-                        Text titleText = new Text("INFORME DE GESTIÓN Y RESULTADOS DE TUTORÍAS");
-                        titleText.SetProperty(Property.FONT_WEIGHT, 700);
-                        header.Add(titleText);
                         document.Add(header);
 
                         document.Add(new Paragraph($"Fecha de generación: {DateTime.Now:dd/MM/yyyy HH:mm}")
@@ -50,36 +46,29 @@ namespace Proyecto_POE.Negocio.ResultadosGestion
                         document.Add(new Paragraph("\n"));
 
                         // Tabla de resultados
-                        Table table = new Table(UnitValue.CreatePercentArray(new float[] { 30, 20, 15, 15, 20 }))
-                            .UseAllAvailableWidth();
+                        float[] columnWidths = { 3, 2, 1, 1, 2 };
+                        Table table = new Table(UnitValue.CreateRelativeArray(columnWidths)).SetWidth(UnitValue.CreatePercentValue(100));
 
-                        // Encabezados
-                        string[] encabezados = { "Asignatura", "Facultad", "Sesiones", "Asistentes", "Puntaje Feedback" };
-                        foreach (var texto in encabezados)
-                        {
-                            Text t = new Text(texto);
-                            t.SetProperty(Property.FONT_WEIGHT, 700);
-                            table.AddHeaderCell(new Cell().Add(new Paragraph(t)));
-                        }
+                        // Encabezados simples (sin SetProperty que rompe)
+                        table.AddHeaderCell(new Cell().Add(new Paragraph("Asignatura")));
+                        table.AddHeaderCell(new Cell().Add(new Paragraph("Facultad")));
+                        table.AddHeaderCell(new Cell().Add(new Paragraph("Sesiones")));
+                        table.AddHeaderCell(new Cell().Add(new Paragraph("Asistentes")));
+                        table.AddHeaderCell(new Cell().Add(new Paragraph("Puntaje Feedback")));
 
                         foreach (var item in datos)
                         {
-                            table.AddCell(item.NombreAsignatura);
-                            table.AddCell(item.Facultad);
-                            table.AddCell(item.TotalSesiones.ToString());
-                            table.AddCell(item.TotalAsistentes.ToString());
-                            table.AddCell(item.PromedioCalificacion.ToString("F2"));
+                            table.AddCell(new Cell().Add(new Paragraph(item.NombreAsignatura)));
+                            table.AddCell(new Cell().Add(new Paragraph(item.Facultad)));
+                            table.AddCell(new Cell().Add(new Paragraph(item.TotalSesiones.ToString())));
+                            table.AddCell(new Cell().Add(new Paragraph(item.TotalAsistentes.ToString())));
+                            table.AddCell(new Cell().Add(new Paragraph(item.PromedioCalificacion.ToString("F2"))));
                         }
 
                         document.Add(table);
 
                         // Resumen Ejecutivo
-                        Paragraph resumenTitle = new Paragraph();
-                        Text rtText = new Text("\nResumen Ejecutivo");
-                        rtText.SetProperty(Property.FONT_WEIGHT, 700);
-                        rtText.SetUnderline(); // Uso de método estándar en lugar de propiedad genérica
-                        resumenTitle.Add(rtText);
-                        document.Add(resumenTitle);
+                        document.Add(new Paragraph("\nResumen Ejecutivo").SetFontSize(14));
                         
                         int granTotalAsistentes = 0;
                         datos.ForEach(d => granTotalAsistentes += d.TotalAsistentes);
