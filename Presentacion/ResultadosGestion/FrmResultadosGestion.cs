@@ -42,6 +42,9 @@ namespace Proyecto_POE.Presentacion.ResultadosGestion
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "PDF Files|*.pdf";
             sfd.FileName = "Informe_Gestion_" + DateTime.Now.ToString("yyyyMMdd") + ".pdf";
+            sfd.Title = "Guardar Informe de Gestión";
+            sfd.CheckPathExists = true;
+            sfd.OverwritePrompt = true;
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
