@@ -6,16 +6,131 @@ Este documento contiene las especificaciones técnicas, diagramas y manuales req
 
 ## 📊 Documentación UML
 
-### 1. Diagrama de Arquitectura de Base de Datos
-El sistema utiliza una base de datos relacional en SQL Server con integridad referencial completa.
-- **Tablas principales:** `SesionesTutoria`, `Asignaturas`, `Tutores`, `Estudiantes`.
-- **Relaciones:** N:M entre Estudiantes y Sesiones gestionada mediante la tabla `Estudiante_Sesiones`.
+### 1. Diagrama de Casos de Uso (PlantUML)
+```plantuml
+@startuml
+left to right direction
+actor "Administrador" as Admin
+actor "Estudiante" as Est
 
-### 2. Diagrama de Clases (Estructura OO)
-Implementado mediante el patrón MVC/3-Capas:
-- **Entidades:** Clases planas (POCO) con propiedades autodefinidas.
-- **Managers (Negocio):** Clases con lógica de validación (ej. evitar traslape de horarios).
-- **DAOs (Datos):** Clases que encapsulan el ADO.NET para CRUDs.
+package "Sistema de Tutorías" {
+  usecase "Gestionar Materias" as UC1
+  usecase "Gestionar Tutores" as UC2
+  usecase "Registrar Sesiones de Tutoría" as UC3
+  usecase "Consultar Agenda" as UC4
+  usecase "Enviar Feedback / Calificar" as UC5
+  usecase "Exportar Reporte PDF" as UC6
+}
+
+Admin --> UC1
+Admin --> UC2
+Admin --> UC3
+Admin --> UC6
+
+Est --> UC4
+Est --> UC5
+@endum
+```
+
+### 2. Diagrama de Clases (Arquitectura 3-Capas)
+```plantuml
+@startuml
+package "Capa Presentación" {
+    class FrmGestionSesiones {
+        - SesionManager manager
+        + btnGuardar_Click()
+        + CargarDatos()
+    }
+}
+
+package "Capa Negocio" {
+    class SesionManager {
+        - SesionDAO dao
+        + ProcesarRegistro(Sesion)
+        + ObtenerCronograma()
+    }
+}
+
+package "Capa Datos" {
+    class SesionDAO {
+        - ConexionBD conexion
+        + Registrar(Sesion)
+        + Listar() : List<Sesion>
+    }
+    class ConexionBD {
+        + LeerConexion() : SqlConnection
+    }
+}
+
+package "Capa Entidades" {
+    class Sesion {
+        + int ID
+        + DateTime Fecha
+        + TimeSpan HoraInicio
+        + TimeSpan HoraFin
+        + String Ubicacion
+        + int OrdenSecuencial
+    }
+}
+
+FrmGestionSesiones ..> SesionManager
+SesionManager ..> SesionDAO
+SesionDAO ..> ConexionBD
+SesionDAO ..> Sesion
+@endum
+```
+
+### 3. Diagrama de Entidad-Relación (Base de Datos)
+```plantuml
+@startuml
+entity "SesionesTutoria" as sesion {
+    * IdSesion : int <<PK>>
+    --
+    Fecha : date
+    HoraInicio : time
+    HoraFin : time
+    Ubicacion : nvarchar
+    OrdenSecuencial : int
+}
+
+entity "Asignaturas" as asignatura {
+    * IdAsignatura : int <<PK>>
+    --
+    Codigo : nvarchar
+    Nombre : nvarchar
+}
+
+entity "Tutores" as tutor {
+    * IdTutor : int <<PK>>
+    --
+    Nombres : nvarchar
+    Apellidos : nvarchar
+    Especialidad : nvarchar
+}
+
+entity "Estudiantes" as estudiante {
+    * IdEstudiante : int <<PK>>
+    --
+    Matricula : nvarchar
+    Nombres : nvarchar
+    Email : nvarchar
+}
+
+entity "Feedback" as fb {
+    * IdFeedback : int <<PK>>
+    --
+    IdEstudiante : int <<FK>>
+    IdSesion : int <<FK>>
+    Calificacion : int
+    Comentarios : text
+}
+
+sesion }|--|| asignatura : pertenece
+sesion }|--|| tutor : dictada por
+fb }|--|| estudiante : escrito por
+fb }|--|| sesion : sobre
+@endum
+```
 
 ---
 
