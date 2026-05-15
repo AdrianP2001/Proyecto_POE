@@ -1,6 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
+using iText.IO.Font.Constants;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
@@ -35,11 +33,14 @@ namespace Proyecto_POE.Negocio.ResultadosGestion
                         document.SetMargins(36, 36, 36, 36);
 
                         // Título
-                        Paragraph header = new Paragraph("INFORME DE GESTIÓN Y RESULTADOS DE TUTORÍAS")
+                        Paragraph header = new Paragraph()
                             .SetTextAlignment(TextAlignment.CENTER)
                             .SetFontSize(18)
-                            .SetBold()
                             .SetFontColor(ColorConstants.BLUE);
+                        
+                        Text titleText = new Text("INFORME DE GESTIÓN Y RESULTADOS DE TUTORÍAS");
+                        titleText.SetProperty(Property.FONT_WEIGHT, 700);
+                        header.Add(titleText);
                         document.Add(header);
 
                         document.Add(new Paragraph($"Fecha de generación: {DateTime.Now:dd/MM/yyyy HH:mm}")
@@ -53,11 +54,13 @@ namespace Proyecto_POE.Negocio.ResultadosGestion
                             .UseAllAvailableWidth();
 
                         // Encabezados
-                        table.AddHeaderCell(new Cell().Add(new Paragraph("Asignatura").SetBold()));
-                        table.AddHeaderCell(new Cell().Add(new Paragraph("Facultad").SetBold()));
-                        table.AddHeaderCell(new Cell().Add(new Paragraph("Sesiones").SetBold()));
-                        table.AddHeaderCell(new Cell().Add(new Paragraph("Asistentes").SetBold()));
-                        table.AddHeaderCell(new Cell().Add(new Paragraph("Puntaje Feedback").SetBold()));
+                        string[] encabezados = { "Asignatura", "Facultad", "Sesiones", "Asistentes", "Puntaje Feedback" };
+                        foreach (var texto in encabezados)
+                        {
+                            Text t = new Text(texto);
+                            t.SetProperty(Property.FONT_WEIGHT, 700);
+                            table.AddHeaderCell(new Cell().Add(new Paragraph(t)));
+                        }
 
                         foreach (var item in datos)
                         {
@@ -71,9 +74,12 @@ namespace Proyecto_POE.Negocio.ResultadosGestion
                         document.Add(table);
 
                         // Resumen Ejecutivo
-                        document.Add(new Paragraph("\nResumen Ejecutivo")
-                            .SetBold()
-                            .SetUnderline());
+                        Paragraph resumenTitle = new Paragraph();
+                        Text rtText = new Text("\nResumen Ejecutivo");
+                        rtText.SetProperty(Property.FONT_WEIGHT, 700);
+                        rtText.SetProperty(Property.UNDERLINE, true);
+                        resumenTitle.Add(rtText);
+                        document.Add(resumenTitle);
                         
                         int granTotalAsistentes = 0;
                         datos.ForEach(d => granTotalAsistentes += d.TotalAsistentes);
