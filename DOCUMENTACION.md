@@ -6,29 +6,66 @@ Este documento contiene las especificaciones técnicas, diagramas y manuales req
 
 ## 📊 Documentación UML
 
-### 1. Diagrama de Casos de Uso (PlantUML)
+### 1. Diagramas de Casos de Uso (Mínimo 3)
+
+#### A. Gestión de Entidades (Administrador)
 ```plantuml
 @startuml
 left to right direction
 actor "Administrador" as Admin
-actor "Estudiante" as Est
 
-package "Sistema de Tutorías" {
-  usecase "Gestionar Materias" as UC1
-  usecase "Gestionar Tutores" as UC2
-  usecase "Registrar Sesiones de Tutoría" as UC3
-  usecase "Consultar Agenda" as UC4
-  usecase "Enviar Feedback / Calificar" as UC5
-  usecase "Exportar Reporte PDF" as UC6
+package "Gestión de Recursos" {
+  usecase "Registrar Materia / Célula" as UC1
+  usecase "Modificar Datos de Materia" as UC2
+  usecase "Registrar Tutor Académico" as UC3
+  usecase "Asignar Foto a Tutor" as UC4
 }
 
 Admin --> UC1
 Admin --> UC2
 Admin --> UC3
-Admin --> UC6
+Admin --> UC4
+@endum
+```
 
-Est --> UC4
-Est --> UC5
+#### B. Gestión de Horarios y Sesiones (Módulo Central)
+```plantuml
+@startuml
+left to right direction
+actor "Administrador" as Admin
+
+package "Control de Cronograma" {
+  usecase "Registrar Nueva Sesión" as UC5
+  usecase "Validar Cruce de Horarios" as UC6
+  usecase "Definir Orden Secuencial" as UC7
+  usecase "Asignar Ubicación / Enlace" as UC8
+}
+
+Admin --> UC5
+UC5 ..> UC6 : <<include>>
+UC5 ..> UC7 : <<include>>
+Admin --> UC8
+@endum
+```
+
+#### C. Interacción del Estudiante y Resultados
+```plantuml
+@startuml
+left to right direction
+actor "Estudiante" as Est
+actor "Administrador" as Admin
+
+package "Interacción e Informes" {
+  usecase "Consultar Agenda por Facultad" as UC9
+  usecase "Calificar Tutor (Feedback)" as UC10
+  usecase "Ver Galería de Sesiones" as UC11
+  usecase "Generar Reporte PDF de Gestión" as UC12
+}
+
+Est --> UC9
+Est --> UC10
+Est --> UC11
+Admin --> UC12
 @endum
 ```
 
