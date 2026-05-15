@@ -24,5 +24,18 @@ namespace Proyecto_POE.Presentacion
             var frm = new FrmResultadosGestion();
             frm.ShowDialog();
         }
+
+        // Mismo degradado de fondo que FrmMenuPrincipal
+        private void FrmAdministrador_Paint(object sender, PaintEventArgs e)
+        {
+            using (var brush = new System.Drawing.Drawing2D.LinearGradientBrush(
+                this.ClientRectangle,
+                Color.FromArgb(15, 32, 90),
+                Color.FromArgb(36, 74, 163),
+                System.Drawing.Drawing2D.LinearGradientMode.Vertical))
+            {
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
+        }
     }
 }
