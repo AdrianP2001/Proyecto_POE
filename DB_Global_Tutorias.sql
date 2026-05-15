@@ -11,6 +11,8 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Se
 BEGIN
     CREATE TABLE SesionesTutoria (
         IdSesion INT PRIMARY KEY IDENTITY(1,1),
+        IdAsignatura INT NULL FOREIGN KEY REFERENCES Asignaturas(IdAsignatura),
+        IdTutor INT NULL FOREIGN KEY REFERENCES Tutores(IdTutor),
         Fecha DATE NOT NULL,
         HoraInicio TIME NOT NULL,
         HoraFin TIME NOT NULL,
