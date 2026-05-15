@@ -103,69 +103,7 @@ BEGIN
 END
 GO
 
--- Nuevas Tablas para el Módulo de Estudiantes
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Asignaturas]') AND type in (N'U'))
-BEGIN
-    CREATE TABLE Asignaturas (
-        IdAsignatura INT PRIMARY KEY IDENTITY(1,1),
-        Codigo NVARCHAR(50) NOT NULL UNIQUE,
-        Nombre NVARCHAR(255) NOT NULL,
-        Activo BIT DEFAULT 1
-    );
-END
-GO
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Tutores]') AND type in (N'U'))
-BEGIN
-    CREATE TABLE Tutores (
-        IdTutor INT PRIMARY KEY IDENTITY(1,1),
-        Nombres NVARCHAR(100) NOT NULL,
-        Apellidos NVARCHAR(100) NOT NULL,
-        Especialidad NVARCHAR(255) NOT NULL,
-        Activo BIT DEFAULT 1
-    );
-END
-GO
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Estudiantes]') AND type in (N'U'))
-BEGIN
-    CREATE TABLE Estudiantes (
-        IdEstudiante INT PRIMARY KEY IDENTITY(1,1),
-        Matricula NVARCHAR(50) NOT NULL UNIQUE,
-        Nombres NVARCHAR(100) NOT NULL,
-        Apellidos NVARCHAR(100) NOT NULL,
-        Email NVARCHAR(255) NULL,
-        Activo BIT DEFAULT 1
-    );
-END
-GO
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Estudiante_Sesiones]') AND type in (N'U'))
-BEGIN
-    CREATE TABLE Estudiante_Sesiones (
-        IdInscripcion INT PRIMARY KEY IDENTITY(1,1),
-        IdEstudiante INT NOT NULL FOREIGN KEY REFERENCES Estudiantes(IdEstudiante),
-        IdSesion INT NOT NULL FOREIGN KEY REFERENCES SesionesTutoria(IdSesion),
-        Asistencia BIT DEFAULT 0, -- 0 = No asistió, 1 = Asistió
-        Activo BIT DEFAULT 1
-    );
-END
-GO
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Feedback]') AND type in (N'U'))
-BEGIN
-    CREATE TABLE Feedback (
-        IdFeedback INT PRIMARY KEY IDENTITY(1,1),
-        IdEstudiante INT NOT NULL FOREIGN KEY REFERENCES Estudiantes(IdEstudiante),
-        IdSesion INT NOT NULL FOREIGN KEY REFERENCES SesionesTutoria(IdSesion),
-        Calificacion INT NOT NULL CHECK (Calificacion >= 1 AND Calificacion <= 5),
-        Comentarios NVARCHAR(MAX) NULL,
-        FechaRegistro DATETIME DEFAULT GETDATE(),
-        Activo BIT DEFAULT 1
-    );
-END
-GO
+-- Se han consolidado las definiciones de tabla arriba para evitar duplicidad.
 
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Actividades]') AND type in (N'U'))
 BEGIN
