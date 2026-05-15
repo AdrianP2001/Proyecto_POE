@@ -16,7 +16,7 @@ namespace Proyecto_POE.Presentacion
             lblSubtitulo = new Label();
             lblTitulo = new Label();
             pnlBotones = new Panel();
-            btnGestionSesiones = new Button();
+            btnModuloAdministrador = new Button();
             btnModuloEstudiante = new Button();
             lblVersion = new Label();
             pnlHeader.SuspendLayout();
@@ -61,29 +61,29 @@ namespace Proyecto_POE.Presentacion
             // pnlBotones
             // 
             pnlBotones.BackColor = Color.Transparent;
-            pnlBotones.Controls.Add(btnGestionSesiones);
+            pnlBotones.Controls.Add(btnModuloAdministrador);
             pnlBotones.Controls.Add(btnModuloEstudiante);
             pnlBotones.Location = new Point(60, 160);
             pnlBotones.Name = "pnlBotones";
             pnlBotones.Size = new Size(560, 210);
             pnlBotones.TabIndex = 0;
             // 
-            // btnGestionSesiones
+            // btnModuloAdministrador
             // 
-            btnGestionSesiones.BackColor = Color.FromArgb(255, 255, 30);
-            btnGestionSesiones.Cursor = Cursors.Hand;
-            btnGestionSesiones.FlatAppearance.BorderColor = Color.FromArgb(100, 180, 255);
-            btnGestionSesiones.FlatAppearance.BorderSize = 2;
-            btnGestionSesiones.FlatStyle = FlatStyle.Flat;
-            btnGestionSesiones.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
-            btnGestionSesiones.ForeColor = Color.White;
-            btnGestionSesiones.Location = new Point(20, 20);
-            btnGestionSesiones.Name = "btnGestionSesiones";
-            btnGestionSesiones.Size = new Size(240, 160);
-            btnGestionSesiones.TabIndex = 0;
-            btnGestionSesiones.Text = "📅\r\n\r\nGestion de\r\nSesiones";
-            btnGestionSesiones.UseVisualStyleBackColor = false;
-            btnGestionSesiones.Click += btnGestionSesiones_Click;
+            btnModuloAdministrador.BackColor = Color.FromArgb(0, 150, 136); // Teal for Admin
+            btnModuloAdministrador.Cursor = Cursors.Hand;
+            btnModuloAdministrador.FlatAppearance.BorderColor = Color.FromArgb(100, 180, 255);
+            btnModuloAdministrador.FlatAppearance.BorderSize = 2;
+            btnModuloAdministrador.FlatStyle = FlatStyle.Flat;
+            btnModuloAdministrador.Font = new Font("Segoe UI", 13F, FontStyle.Bold);
+            btnModuloAdministrador.ForeColor = Color.White;
+            btnModuloAdministrador.Location = new Point(20, 20);
+            btnModuloAdministrador.Name = "btnModuloAdministrador";
+            btnModuloAdministrador.Size = new Size(240, 160);
+            btnModuloAdministrador.TabIndex = 0;
+            btnModuloAdministrador.Text = "⚙️\r\n\r\nModulo\r\nAdministrador";
+            btnModuloAdministrador.UseVisualStyleBackColor = false;
+            btnModuloAdministrador.Click += btnModuloAdministrador_Click;
             // 
             // btnModuloEstudiante
             // 
@@ -141,7 +141,7 @@ namespace Proyecto_POE.Presentacion
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Label lblSubtitulo;
         private System.Windows.Forms.Panel pnlBotones;
-        private System.Windows.Forms.Button btnGestionSesiones;
+        private System.Windows.Forms.Button btnModuloAdministrador;
         private System.Windows.Forms.Button btnModuloEstudiante;
         private System.Windows.Forms.Label lblVersion;
     }

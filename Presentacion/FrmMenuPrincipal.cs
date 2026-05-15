@@ -16,11 +16,10 @@ namespace Proyecto_POE.Presentacion
             // No hace falta cargar datos en el menu
         }
 
-        private void btnGestionSesiones_Click(object sender, EventArgs e)
+        private void btnModuloAdministrador_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Este modulo se desarrolla en otra rama.", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            // var frm = new FrmGestionSesiones();
-            // frm.Show();
+            var frm = new FrmAdministrador();
+            frm.Show();
         }
 
         private void btnModuloEstudiante_Click(object sender, EventArgs e)
