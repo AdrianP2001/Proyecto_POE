@@ -28,6 +28,7 @@ namespace Proyecto_POE.Presentacion
         // Mismo degradado de fondo que FrmMenuPrincipal
         private void FrmAdministrador_Paint(object sender, PaintEventArgs e)
         {
+            if (ClientRectangle.Width == 0 || ClientRectangle.Height == 0) return;
             using (var brush = new System.Drawing.Drawing2D.LinearGradientBrush(
                 this.ClientRectangle,
                 Color.FromArgb(15, 32, 90),

@@ -30,6 +30,7 @@ namespace Proyecto_POE.Presentacion
 
         private void FrmMenuPrincipal_Paint(object sender, PaintEventArgs e)
         {
+            if (ClientRectangle.Width == 0 || ClientRectangle.Height == 0) return;
             // Degradado de fondo azul universitario
             using (var brush = new System.Drawing.Drawing2D.LinearGradientBrush(
                 this.ClientRectangle,
