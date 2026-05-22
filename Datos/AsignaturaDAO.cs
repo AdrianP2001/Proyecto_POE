@@ -14,9 +14,6 @@ namespace Proyecto_POE.Datos
             List<Asignatura> lista = new List<Asignatura>();
             using (SqlConnection conn = _conexion.LeerConexion())
             {
-                // Diagnóstico para el Master
-                System.Diagnostics.Debug.WriteLine("DEBUG: Usando conexión: " + conn.ConnectionString);
-                
                 string query = "SELECT IdAsignatura, Codigo, Nombre, Facultad, Area, Descripcion, Modalidad, Activo FROM Asignaturas WHERE Activo = 1";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 conn.Open();
