@@ -150,7 +150,6 @@
             cmbArea.Name = "cmbArea";
             cmbArea.Size = new Size(250, 23);
             cmbArea.TabIndex = 7;
-            cmbArea.SelectedIndexChanged += cmbArea_SelectedIndexChanged_1;
             // 
             // dtpFecha
             // 

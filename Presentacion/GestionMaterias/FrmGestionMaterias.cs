@@ -71,7 +71,40 @@ namespace Proyecto_POE.Presentacion.GestionMaterias
         private void cmbArea_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbArea.SelectedIndex == -1) return;
-            // Lógica de imágenes omitida por brevedad o adaptada si es necesario
+            string area = cmbArea.SelectedItem?.ToString() ?? "";
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string assetsPath = Path.Combine(baseDir, "Imagenes");
+
+            // Limpiar imagen anterior para evitar confusión si falla la carga
+            pictureBox1.Image = null;
+
+            try
+            {
+                switch (area)
+                {
+                    case "Sociales": CargarImagenSafe(Path.Combine(assetsPath, "sociales.png")); break;
+                    case "Salud": CargarImagenSafe(Path.Combine(assetsPath, "salud.png")); break;
+                    case "Ingeniería": CargarImagenSafe(Path.Combine(assetsPath, "ingenieria.png")); break;
+                    case "Educación": CargarImagenSafe(Path.Combine(assetsPath, "educacion.png")); break;
+                    case "Artes": CargarImagenSafe(Path.Combine(assetsPath, "artes.png")); break;
+                    case "Exactas": pictureBox1.LoadAsync("https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=400"); break;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error al cargar imagen: " + ex.Message);
+            }
+        }
+
+        private void CargarImagenSafe(string path)
+        {
+            if (File.Exists(path))
+            {
+                using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                {
+                    pictureBox1.Image = Image.FromStream(stream);
+                }
+            }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -80,7 +113,7 @@ namespace Proyecto_POE.Presentacion.GestionMaterias
 
             Asignatura nueva = new Asignatura
             {
-                Codigo = Guid.NewGuid().ToString().Substring(0, 8).ToUpper(), // Generamos un código temporal
+                Codigo = Guid.NewGuid().ToString().Substring(0, 8).ToUpper(), 
                 Nombre = txtMateria.Text.Trim(),
                 Facultad = txtFacultad.Text.Trim(),
                 Area = cmbArea.SelectedItem?.ToString() ?? "",
@@ -117,8 +150,38 @@ namespace Proyecto_POE.Presentacion.GestionMaterias
             rbVirtual.Checked = false;
         }
 
-        private void ConfigurarEventosEstilo() { /* ... */ }
+        private void ConfigurarEventosEstilo()
+        {
+            btnGuardar.MouseEnter += (s, e) => btnGuardar.BackColor = Color.LightGreen;
+            btnGuardar.MouseLeave += (s, e) => btnGuardar.BackColor = SystemColors.Control;
+        }
+
         private void btnLimpiar_Click(object sender, EventArgs e) => LimpiarFormulario();
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dgvMaterias.CurrentRow != null)
+            {
+                var confirm = MessageBox.Show("¿Está seguro de eliminar esta materia?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (confirm == DialogResult.Yes)
+                {
+                    MessageBox.Show("Funcionalidad de eliminación pendiente de implementación en DAO.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void btnImagen_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog abrir = new OpenFileDialog())
+            {
+                abrir.Filter = "Archivos de imagen|*.jpg;*.png;*.jpeg";
+                if (abrir.ShowDialog() == DialogResult.OK)
+                {
+                    pictureBox1.Image = Image.FromFile(abrir.FileName);
+                }
+            }
+        }
+
         private void dgvMaterias_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvMaterias.CurrentRow != null) MostrarDetalles((Asignatura)dgvMaterias.CurrentRow.DataBoundItem);
