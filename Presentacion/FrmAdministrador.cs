@@ -32,6 +32,12 @@ namespace Proyecto_POE.Presentacion
             frm.ShowDialog();
         }
 
+        private void btnGestionTutores_Click(object sender, EventArgs e)
+        {
+            var frm = new FrmGestionTutores();
+            frm.ShowDialog();
+        }
+
         // Mismo degradado de fondo que FrmMenuPrincipal
         private void FrmAdministrador_Paint(object sender, PaintEventArgs e)
         {
