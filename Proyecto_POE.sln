@@ -4,8 +4,6 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proyecto_POE", "Proyecto_POE.csproj", "{B8E5F6B2-D4A1-4F9C-B1A2-C3D4E5F6B7A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistroTutoAcad", "..\RegistroTutoAcad\RegistroTutoAcad.csproj", "{74031174-BAE5-438C-96B9-F711E7F100AC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
