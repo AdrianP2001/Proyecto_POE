@@ -73,11 +73,10 @@ namespace Proyecto_POE.Presentacion.GestionMaterias
             if (cmbArea.SelectedIndex == -1) return;
             string area = cmbArea.SelectedItem?.ToString() ?? "";
             string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            
-            // Buscar carpeta Imagenes (en bin o en proyecto)
             string assetsPath = Path.Combine(baseDir, "Imagenes");
-            if (!Directory.Exists(assetsPath)) 
-                assetsPath = Path.Combine(Directory.GetParent(baseDir).Parent.Parent.FullName, "Imagenes");
+
+            // Limpiar imagen anterior para evitar confusión si falla la carga
+            pictureBox1.Image = null;
 
             try
             {
@@ -91,7 +90,10 @@ namespace Proyecto_POE.Presentacion.GestionMaterias
                     case "Exactas": pictureBox1.LoadAsync("https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=400"); break;
                 }
             }
-            catch { /* Ignorar errores de carga visual */ }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error al cargar imagen: " + ex.Message);
+            }
         }
 
         private void CargarImagenSafe(string path)
