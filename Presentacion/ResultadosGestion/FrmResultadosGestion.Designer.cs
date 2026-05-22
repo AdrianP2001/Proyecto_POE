@@ -37,7 +37,7 @@ namespace Proyecto_POE.Presentacion.ResultadosGestion
             this.dgvResultados.ReadOnly = true;
             this.dgvResultados.RowHeadersWidth = 51;
             this.dgvResultados.Size = new System.Drawing.Size(720, 280);
-            this.dgvResultados.TabIndex = 0
+            this.dgvResultados.TabIndex = 0;
             // 
             // btnExportarPDF
             // 

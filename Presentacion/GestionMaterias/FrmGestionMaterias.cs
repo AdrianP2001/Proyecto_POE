@@ -117,8 +117,39 @@ namespace Proyecto_POE.Presentacion.GestionMaterias
             rbVirtual.Checked = false;
         }
 
-        private void ConfigurarEventosEstilo() { /* ... */ }
+        private void ConfigurarEventosEstilo()
+        {
+            btnGuardar.MouseEnter += (s, e) => btnGuardar.BackColor = Color.LightGreen;
+            btnGuardar.MouseLeave += (s, e) => btnGuardar.BackColor = SystemColors.Control;
+        }
+
         private void btnLimpiar_Click(object sender, EventArgs e) => LimpiarFormulario();
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dgvMaterias.CurrentRow != null)
+            {
+                var confirm = MessageBox.Show("¿Está seguro de eliminar esta materia?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (confirm == DialogResult.Yes)
+                {
+                    // Lógica de eliminación (por ahora solo feedback visual o remover de lista si no hay DAO delete)
+                    MessageBox.Show("Funcionalidad de eliminación pendiente de implementación en DAO.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void btnImagen_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog abrir = new OpenFileDialog())
+            {
+                abrir.Filter = "Archivos de imagen|*.jpg;*.png;*.jpeg";
+                if (abrir.ShowDialog() == DialogResult.OK)
+                {
+                    pictureBox1.Image = Image.FromFile(abrir.FileName);
+                }
+            }
+        }
+
         private void dgvMaterias_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvMaterias.CurrentRow != null) MostrarDetalles((Asignatura)dgvMaterias.CurrentRow.DataBoundItem);
