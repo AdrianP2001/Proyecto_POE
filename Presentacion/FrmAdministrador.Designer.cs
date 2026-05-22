@@ -18,6 +18,7 @@ namespace Proyecto_POE.Presentacion
             pnlBotones = new System.Windows.Forms.Panel();
             btnGestionHorario = new System.Windows.Forms.Button();
             btnResultadosGestion = new System.Windows.Forms.Button();
+            btnGestionMaterias = new System.Windows.Forms.Button();
             lblVersion = new System.Windows.Forms.Label();
             pnlHeader.SuspendLayout();
             pnlBotones.SuspendLayout();
@@ -63,9 +64,10 @@ namespace Proyecto_POE.Presentacion
             pnlBotones.BackColor = System.Drawing.Color.Transparent;
             pnlBotones.Controls.Add(btnGestionHorario);
             pnlBotones.Controls.Add(btnResultadosGestion);
+            pnlBotones.Controls.Add(btnGestionMaterias);
             pnlBotones.Location = new System.Drawing.Point(60, 160);
             pnlBotones.Name = "pnlBotones";
-            pnlBotones.Size = new System.Drawing.Size(560, 210);
+            pnlBotones.Size = new System.Drawing.Size(560, 380);
             pnlBotones.TabIndex = 0;
             // 
             // btnGestionHorario
@@ -102,13 +104,30 @@ namespace Proyecto_POE.Presentacion
             btnResultadosGestion.UseVisualStyleBackColor = false;
             btnResultadosGestion.Click += btnResultadosGestion_Click;
             // 
+            // btnGestionMaterias
+            // 
+            btnGestionMaterias.BackColor = System.Drawing.Color.FromArgb(76, 175, 80);
+            btnGestionMaterias.Cursor = System.Windows.Forms.Cursors.Hand;
+            btnGestionMaterias.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(100, 200, 100);
+            btnGestionMaterias.FlatAppearance.BorderSize = 2;
+            btnGestionMaterias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            btnGestionMaterias.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold);
+            btnGestionMaterias.ForeColor = System.Drawing.Color.White;
+            btnGestionMaterias.Location = new System.Drawing.Point(160, 200);
+            btnGestionMaterias.Name = "btnGestionMaterias";
+            btnGestionMaterias.Size = new System.Drawing.Size(240, 160);
+            btnGestionMaterias.TabIndex = 2;
+            btnGestionMaterias.Text = "📚\r\n\r\nGestion de\r\nMaterias";
+            btnGestionMaterias.UseVisualStyleBackColor = false;
+            btnGestionMaterias.Click += btnGestionMaterias_Click;
+            // 
             // lblVersion
             // 
             lblVersion.BackColor = System.Drawing.Color.Transparent;
             lblVersion.Dock = System.Windows.Forms.DockStyle.Bottom;
             lblVersion.Font = new System.Drawing.Font("Segoe UI", 8F);
             lblVersion.ForeColor = System.Drawing.Color.FromArgb(120, 160, 220);
-            lblVersion.Location = new System.Drawing.Point(0, 400);
+            lblVersion.Location = new System.Drawing.Point(0, 570);
             lblVersion.Name = "lblVersion";
             lblVersion.Size = new System.Drawing.Size(680, 30);
             lblVersion.TabIndex = 2;
@@ -120,7 +139,7 @@ namespace Proyecto_POE.Presentacion
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.Color.FromArgb(15, 32, 90);
-            ClientSize = new System.Drawing.Size(680, 430);
+            ClientSize = new System.Drawing.Size(680, 600);
             Controls.Add(pnlBotones);
             Controls.Add(pnlHeader);
             Controls.Add(lblVersion);
@@ -141,6 +160,7 @@ namespace Proyecto_POE.Presentacion
         private System.Windows.Forms.Panel pnlBotones;
         private System.Windows.Forms.Button btnGestionHorario;
         private System.Windows.Forms.Button btnResultadosGestion;
+        private System.Windows.Forms.Button btnGestionMaterias;
         private System.Windows.Forms.Label lblVersion;
     }
 }

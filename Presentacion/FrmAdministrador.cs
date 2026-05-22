@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Proyecto_POE.Presentacion.GestionSesiones;
 using Proyecto_POE.Presentacion.ResultadosGestion;
+using Proyecto_POE.Presentacion.GestionMaterias;
 
 namespace Proyecto_POE.Presentacion
 {
@@ -22,6 +23,12 @@ namespace Proyecto_POE.Presentacion
         private void btnResultadosGestion_Click(object sender, EventArgs e)
         {
             var frm = new FrmResultadosGestion();
+            frm.ShowDialog();
+        }
+
+        private void btnGestionMaterias_Click(object sender, EventArgs e)
+        {
+            var frm = new FrmGestionMaterias();
             frm.ShowDialog();
         }
 
