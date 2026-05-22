@@ -15,8 +15,22 @@ BEGIN
         Codigo NVARCHAR(50) NOT NULL UNIQUE,
         Nombre NVARCHAR(255) NOT NULL,
         Facultad NVARCHAR(255) DEFAULT 'Facultad de Matemáticas y Física',
+        Area NVARCHAR(255) NULL,
+        Descripcion NVARCHAR(MAX) NULL,
+        Modalidad NVARCHAR(100) NULL,
         Activo BIT DEFAULT 1
     );
+END
+ELSE
+BEGIN
+    IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('Asignaturas') AND name = 'Area')
+        ALTER TABLE Asignaturas ADD Area NVARCHAR(255) NULL;
+    
+    IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('Asignaturas') AND name = 'Descripcion')
+        ALTER TABLE Asignaturas ADD Descripcion NVARCHAR(MAX) NULL;
+
+    IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('Asignaturas') AND name = 'Modalidad')
+        ALTER TABLE Asignaturas ADD Modalidad NVARCHAR(100) NULL;
 END
 GO
 
