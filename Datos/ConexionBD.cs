@@ -5,9 +5,9 @@ namespace Proyecto_POE.Datos
 {
     public class ConexionBD
     {
-        // Se recomienda usar App.config para la cadena de conexion
+        // Se recomienda usar App.config para la cadena de conexión
         private string cadenaConexion = ConfigurationManager.ConnectionStrings["TutoriaConn"]?.ConnectionString 
-                                        ?? "Server=.;Database=TutoriasDB;Integrated Security=True";
+                                        ?? "Data Source=.;Initial Catalog=TutoriasDB;Integrated Security=True;TrustServerCertificate=True";
 
         public SqlConnection LeerConexion()
         {
