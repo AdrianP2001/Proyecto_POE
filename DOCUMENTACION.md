@@ -73,99 +73,84 @@ Admin --> UC12
 ```plantuml
 @startuml
 package "Capa Presentación" {
+    class FrmMenuPrincipal {
+        + AbrirAdmin()
+        + AbrirEstudiante()
+    }
+    class FrmGestionMaterias {
+        - AsignaturaDAO dao
+        + cmbArea_Changed()
+        + CargarImagenAuto()
+    }
+    class FrmGestionTutores {
+        + CargarFoto()
+        + GuardarTutor()
+    }
     class FrmGestionSesiones {
         - SesionManager manager
-        + btnGuardar_Click()
-        + CargarDatos()
+    }
+    class FrmResultadosGestion {
+        + ExportarPDF()
     }
 }
 
 package "Capa Negocio" {
-    class SesionManager {
-        - SesionDAO dao
-        + ProcesarRegistro(Sesion)
-        + ObtenerCronograma()
+    class SesionManager
+    class ReporteManager {
+        + GenerarInformePDF()
     }
 }
 
 package "Capa Datos" {
-    class SesionDAO {
-        - ConexionBD conexion
-        + Registrar(Sesion)
-        + Listar() : List<Sesion>
-    }
-    class ConexionBD {
-        + LeerConexion() : SqlConnection
-    }
+    class AsignaturaDAO
+    class TutorDAO
+    class SesionDAO
+    class ReporteDAO
+    class ConexionBD
 }
 
-package "Capa Entidades" {
-    class Sesion {
-        + int ID
-        + DateTime Fecha
-        + TimeSpan HoraInicio
-        + TimeSpan HoraFin
-        + String Ubicacion
-        + int OrdenSecuencial
-    }
-}
-
-FrmGestionSesiones ..> SesionManager
-SesionManager ..> SesionDAO
-SesionDAO ..> ConexionBD
-SesionDAO ..> Sesion
+FrmMenuPrincipal ..> FrmGestionMaterias
+FrmMenuPrincipal ..> FrmGestionTutores
+FrmGestionMaterias ..> AsignaturaDAO
+FrmResultadosGestion ..> ReporteManager
+ReporteManager ..> ReporteDAO
 @endum
 ```
 
-### 3. Diagrama de Entidad-Relación (Base de Datos)
+### 3. Diagrama de Entidad-Relación (Base de Datos Completa)
 ```plantuml
 @startuml
-entity "SesionesTutoria" as sesion {
-    * IdSesion : int <<PK>>
+entity "Asignaturas" as A {
+    * IdAsignatura
     --
-    Fecha : date
-    HoraInicio : time
-    HoraFin : time
-    Ubicacion : nvarchar
-    OrdenSecuencial : int
+    Codigo, Nombre, Facultad, Area
+    Descripcion, Modalidad
+}
+entity "Tutores" as T {
+    * IdTutor
+    --
+    Nombres, Apellidos, Especialidad, FotoRuta
+}
+entity "SesionesTutoria" as S {
+    * IdSesion
+    --
+    IdAsignatura (FK), IdTutor (FK)
+    Fecha, HoraInicio, Ubicacion
+}
+entity "Actividades" as ACT {
+    * IdActividad
+    --
+    Titulo, Descripcion, FechaVencimiento
+}
+entity "Galeria" as G {
+    * IdImagen
+    --
+    IdActividad (FK), Titulo, RutaLocal
 }
 
-entity "Asignaturas" as asignatura {
-    * IdAsignatura : int <<PK>>
-    --
-    Codigo : nvarchar
-    Nombre : nvarchar
-}
-
-entity "Tutores" as tutor {
-    * IdTutor : int <<PK>>
-    --
-    Nombres : nvarchar
-    Apellidos : nvarchar
-    Especialidad : nvarchar
-}
-
-entity "Estudiantes" as estudiante {
-    * IdEstudiante : int <<PK>>
-    --
-    Matricula : nvarchar
-    Nombres : nvarchar
-    Email : nvarchar
-}
-
-entity "Feedback" as fb {
-    * IdFeedback : int <<PK>>
-    --
-    IdEstudiante : int <<FK>>
-    IdSesion : int <<FK>>
-    Calificacion : int
-    Comentarios : text
-}
-
-sesion }|--|| asignatura : pertenece
-sesion }|--|| tutor : dictada por
-fb }|--|| estudiante : escrito por
-fb }|--|| sesion : sobre
+S }|--|| A
+S }|--|| T
+G }|--|| ACT
 @endum
 ```
 

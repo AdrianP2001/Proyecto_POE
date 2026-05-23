@@ -24,15 +24,16 @@ El proyecto está organizado bajo el patrón de **3 Capas (N-Tier)**, lo que sep
 ## 🚀 Funcionalidades Principales
 
 ### 👨‍💼 Módulo Administrador
-- **Gestión de Materias:** Registro de células de estudio, facultades y áreas académicas.
-- **Registro de Tutores:** Gestión de perfiles con especialidades y fotografía.
-- **Gestión de Horarios y Sesiones:** Control total sobre el cronograma (aula, fecha, hora) y orden secuencial automático.
-- **Reportes:** Exportación de informes de gestión en formato **PDF**.
+- **Registro de Materias (Células):** Módulo inteligente con carga automática de logos por área académica.
+- **Registro de Tutores:** Gestión de perfiles con especialidades y carga de fotografía individual.
+- **Gestión de Horarios y Sesiones:** Control total sobre el cronograma con validación automática de choques y orden secuencial.
+- **Resultados de Gestión:** Motor de reportes con exportación a **PDF Profesional (iText9)** y apertura automática.
 
 ### 🎓 Módulo Estudiante
-- **Consulta de Tutorías:** Buscador de materias y detalle de tutores/horarios.
-- **Calendario Activo:** Visualización de la agenda filtrada por facultades.
-- **Interacción:** Sistema de feedback, comentarios y galería de fotos de sesiones realizadas.
+- **Panel Multifuncional:** Interfaz basada en pestañas para una experiencia de usuario fluida.
+- **Calendario de Actividades:** Visualización de la agenda con filtros por facultad.
+- **Galería de Sesiones:** Visualizador de registros fotográficos de tutorías realizadas.
+- **Interacción y Feedback:** Sistema de calificación por estrellas y comentarios para evaluar al tutor.
 
 ---
 
