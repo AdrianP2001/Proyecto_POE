@@ -68,8 +68,8 @@ Para cumplir con los entregables del proyecto, hemos creado una sección especí
 ## 👥 Equipo de Trabajo
 *Proyecto desarrollado para la asignatura de Programación Orientada a Eventos.*
 
-- **Líder de Proyecto (Master):** [Tu Nombre/Usuario]
-- **Colaboradores:** Emanuel, Adrian, [Otros nombres].
+- **Líder de Proyecto (Master):** Todos
+- **Colaboradores:** Emanuel, Adrian,Villon,Anthony y Juan.
 
 ---
 *© 2026 - Facultad de Matemáticas y Física*
