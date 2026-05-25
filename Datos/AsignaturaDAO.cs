@@ -57,5 +57,17 @@ namespace Proyecto_POE.Datos
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
+
+        public bool Eliminar(int idAsignatura)
+        {
+            using (SqlConnection conn = _conexion.LeerConexion())
+            {
+                string query = "UPDATE Asignaturas SET Activo = 0 WHERE IdAsignatura = @Id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Id", idAsignatura);
+                conn.Open();
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
     }
 }

@@ -160,12 +160,28 @@ namespace Proyecto_POE.Presentacion.GestionMaterias
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (dgvMaterias.CurrentRow != null)
+            if (dgvMaterias.CurrentRow != null && dgvMaterias.CurrentRow.DataBoundItem is Asignatura a)
             {
-                var confirm = MessageBox.Show("¿Está seguro de eliminar esta materia?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                var confirm = MessageBox.Show($"¿Está seguro de eliminar la materia '{a.Nombre}'?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (confirm == DialogResult.Yes)
                 {
-                    MessageBox.Show("Funcionalidad de eliminación pendiente de implementación en DAO.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    try
+                    {
+                        if (_asignaturaDAO.Eliminar(a.IdAsignatura))
+                        {
+                            MessageBox.Show("Materia eliminada de la base de datos.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            CargarDatos();
+                            LimpiarFormulario();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error al eliminar la materia de la base de datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }

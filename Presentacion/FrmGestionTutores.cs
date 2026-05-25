@@ -30,12 +30,37 @@ namespace Proyecto_POE.Presentacion
             dgvTutores.DataSource = _bindingSource;
         }
 
+        private string rutaFotoTemporal = "";
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtNombres.Text) || string.IsNullOrWhiteSpace(txtApellidos.Text))
             {
-                MessageBox.Show("Por favor, ingrese nombres y apellidos.", "Validacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Por favor, ingrese nombres y apellidos.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+            }
+
+            string fotoDestino = "";
+            if (!string.IsNullOrEmpty(rutaFotoTemporal) && File.Exists(rutaFotoTemporal))
+            {
+                try
+                {
+                    string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+                    string imgDir = Path.Combine(baseDir, "Imagenes", "Tutores");
+                    if (!Directory.Exists(imgDir))
+                        Directory.CreateDirectory(imgDir);
+                    
+                    string ext = Path.GetExtension(rutaFotoTemporal);
+                    string uniqueName = "tutor_" + Guid.NewGuid().ToString() + ext;
+                    string destPath = Path.Combine(imgDir, uniqueName);
+                    
+                    File.Copy(rutaFotoTemporal, destPath, true);
+                    fotoDestino = Path.Combine("Imagenes", "Tutores", uniqueName);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Error al copiar foto de tutor: " + ex.Message);
+                }
             }
 
             var t = new Tutor
@@ -43,14 +68,27 @@ namespace Proyecto_POE.Presentacion
                 Nombres = txtNombres.Text.Trim(),
                 Apellidos = txtApellidos.Text.Trim(),
                 Especialidad = txtEspecialidad.Text.Trim(),
+                FotoRuta = fotoDestino,
                 Activo = true
             };
 
-            // Nota: Aquí se debería llamar a un método Insertar en el DAO/Negocio
-            // Por ahora simulamos el éxito si el manager lo permite o agregamos a la lista
-            MessageBox.Show("Tutor registrado correctamente (Simulado).", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            CargarGrilla();
-            Limpiar();
+            try
+            {
+                if (_tutoriasManager.RegistrarTutor(t))
+                {
+                    MessageBox.Show("Tutor registrado correctamente en la base de datos.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CargarGrilla();
+                    Limpiar();
+                }
+                else
+                {
+                    MessageBox.Show("Error al registrar el tutor en la base de datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void Limpiar()
@@ -59,6 +97,7 @@ namespace Proyecto_POE.Presentacion
             txtApellidos.Clear();
             txtEspecialidad.Clear();
             picFoto.Image = null;
+            rutaFotoTemporal = "";
         }
 
         private void btnCargarFoto_Click(object sender, EventArgs e)
@@ -69,6 +108,7 @@ namespace Proyecto_POE.Presentacion
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     picFoto.Image = Image.FromFile(ofd.FileName);
+                    rutaFotoTemporal = ofd.FileName;
                 }
             }
         }

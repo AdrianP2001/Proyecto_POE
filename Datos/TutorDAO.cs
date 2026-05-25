@@ -14,7 +14,7 @@ namespace Proyecto_POE.Datos
             List<Tutor> lista = new List<Tutor>();
             using (SqlConnection conn = _conexion.LeerConexion())
             {
-                string query = "SELECT IdTutor, Nombres, Apellidos, Especialidad, Activo FROM Tutores WHERE Activo = 1";
+                string query = "SELECT IdTutor, Nombres, Apellidos, Especialidad, FotoRuta, Activo FROM Tutores WHERE Activo = 1";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 conn.Open();
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -27,6 +27,7 @@ namespace Proyecto_POE.Datos
                             Nombres = reader["Nombres"].ToString(),
                             Apellidos = reader["Apellidos"].ToString(),
                             Especialidad = reader["Especialidad"].ToString(),
+                            FotoRuta = reader["FotoRuta"]?.ToString() ?? string.Empty,
                             Activo = Convert.ToBoolean(reader["Activo"])
                         });
                     }
@@ -41,7 +42,7 @@ namespace Proyecto_POE.Datos
             using (SqlConnection conn = _conexion.LeerConexion())
             {
                 string query = @"
-                    SELECT DISTINCT t.IdTutor, t.Nombres, t.Apellidos, t.Especialidad, t.Activo 
+                    SELECT DISTINCT t.IdTutor, t.Nombres, t.Apellidos, t.Especialidad, t.FotoRuta, t.Activo 
                     FROM Tutores t
                     INNER JOIN SesionesTutoria s ON t.IdTutor = s.IdTutor
                     WHERE s.IdAsignatura = @IdAsignatura AND t.Activo = 1 AND s.Activo = 1";
@@ -58,6 +59,7 @@ namespace Proyecto_POE.Datos
                             Nombres = reader["Nombres"].ToString(),
                             Apellidos = reader["Apellidos"].ToString(),
                             Especialidad = reader["Especialidad"].ToString(),
+                            FotoRuta = reader["FotoRuta"]?.ToString() ?? string.Empty,
                             Activo = Convert.ToBoolean(reader["Activo"])
                         });
                     }
@@ -71,12 +73,12 @@ namespace Proyecto_POE.Datos
             using (SqlConnection conn = _conexion.LeerConexion())
             {
                 string query = @"
-                    SELECT TOP 1 t.IdTutor, t.Nombres, t.Apellidos, t.Especialidad, AVG(CAST(f.Calificacion AS FLOAT)) AS Promedio
+                    SELECT TOP 1 t.IdTutor, t.Nombres, t.Apellidos, t.Especialidad, t.FotoRuta, AVG(CAST(f.Calificacion AS FLOAT)) AS Promedio
                     FROM Feedback f
                     INNER JOIN SesionesTutoria s ON f.IdSesion = s.IdSesion
                     INNER JOIN Tutores t ON s.IdTutor = t.IdTutor
                     WHERE f.Activo = 1 AND s.Activo = 1 AND t.Activo = 1
-                    GROUP BY t.IdTutor, t.Nombres, t.Apellidos, t.Especialidad
+                    GROUP BY t.IdTutor, t.Nombres, t.Apellidos, t.Especialidad, t.FotoRuta
                     ORDER BY Promedio DESC";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 conn.Open();
@@ -90,6 +92,7 @@ namespace Proyecto_POE.Datos
                             Nombres = reader["Nombres"].ToString(),
                             Apellidos = reader["Apellidos"].ToString(),
                             Especialidad = reader["Especialidad"].ToString(),
+                            FotoRuta = reader["FotoRuta"]?.ToString() ?? string.Empty,
                             Activo = true
                         };
                         double promedio = Convert.ToDouble(reader["Promedio"]);
@@ -98,6 +101,24 @@ namespace Proyecto_POE.Datos
                 }
             }
             return null;
+        }
+
+        public bool Insertar(Tutor tutor)
+        {
+            using (SqlConnection conn = _conexion.LeerConexion())
+            {
+                string query = "INSERT INTO Tutores (Nombres, Apellidos, Especialidad, FotoRuta, Activo) " +
+                               "VALUES (@Nombres, @Apellidos, @Especialidad, @FotoRuta, @Activo)";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Nombres", tutor.Nombres ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Apellidos", tutor.Apellidos ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Especialidad", tutor.Especialidad ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@FotoRuta", tutor.FotoRuta ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Activo", tutor.Activo);
+
+                conn.Open();
+                return cmd.ExecuteNonQuery() > 0;
+            }
         }
     }
 }

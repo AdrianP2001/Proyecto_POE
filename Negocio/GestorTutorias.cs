@@ -13,5 +13,13 @@ namespace Proyecto_POE.Negocio
         {
             return _tutorDAO.ObtenerTodos();
         }
+
+        public bool RegistrarTutor(Tutor tutor)
+        {
+            if (string.IsNullOrWhiteSpace(tutor.Nombres) || string.IsNullOrWhiteSpace(tutor.Apellidos))
+                throw new ArgumentException("El nombre y el apellido del tutor son obligatorios.");
+            
+            return _tutorDAO.Insertar(tutor);
+        }
     }
 }
