@@ -16,5 +16,10 @@ namespace Proyecto_POE.Negocio
 
             return _actividadDAO.ObtenerActividades(idAsignatura);
         }
+
+        public List<Actividad> ListarTodas()
+        {
+            return _actividadDAO.ObtenerTodas();
+        }
     }
 }

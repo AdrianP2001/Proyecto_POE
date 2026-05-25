@@ -10,6 +10,10 @@ namespace Proyecto_POE.Entidades.GestionSesiones
         public TimeSpan HoraFin { get; set; }
         public string Ubicacion { get; set; } = string.Empty;
         public int OrdenSecuencial { get; set; }
+        public int? IdAsignatura { get; set; }
+        public int? IdTutor { get; set; }
+        public string AsignaturaNombre { get; set; } = string.Empty;
+        public string TutorNombre { get; set; } = string.Empty;
 
         public Sesion() { }
 

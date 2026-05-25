@@ -48,27 +48,56 @@ namespace Proyecto_POE.Presentacion
         private void lstGrupos_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lstGrupos.SelectedItem is Asignatura seleccionado)
-                MostrarDetalleAsignatura(seleccionado.IdAsignatura, seleccionado.Nombre);
+                MostrarDetalleAsignatura(seleccionado);
         }
 
-        private void MostrarDetalleAsignatura(int idAsignatura, string nombreMateria)
+        private void MostrarDetalleAsignatura(Asignatura asignatura)
         {
-            lblNombreMateria.Text = nombreMateria;
-            txtDescripcionGrupo.Text = $"Asignatura: {nombreMateria}";
+            lblNombreMateria.Text = asignatura.Nombre;
+            txtDescripcionGrupo.Text = $"Código: {asignatura.Codigo}\r\nFacultad: {asignatura.Facultad}\r\nÁrea: {asignatura.Area}\r\nModalidad: {asignatura.Modalidad}\r\nDescripción: {asignatura.Descripcion}";
 
-            // Tutores (Por ahora mostramos todos los tutores)
+            // Tutores asignados (a través de sus sesiones de tutoría)
             lstTutores.Items.Clear();
-            var tutores = _tutoriasManager.ListarTutores();
-            foreach (var t in tutores)
-                lstTutores.Items.Add($"👤 {t.Nombres} {t.Apellidos}  |  {t.Especialidad}");
+            var tutores = new Proyecto_POE.Datos.TutorDAO().ObtenerPorAsignatura(asignatura.IdAsignatura);
+            if (tutores.Count == 0)
+            {
+                lstTutores.Items.Add("👤 No hay tutores asignados a esta asignatura.");
+            }
+            else
+            {
+                foreach (var t in tutores)
+                    lstTutores.Items.Add($"👤 {t.Nombres} {t.Apellidos}  |  {t.Especialidad}");
+            }
 
-            // Horarios
+            // Horarios y Sesiones
             lstHorarios.Items.Clear();
-            lstHorarios.Items.Add("📅 Horarios pendientes de asignar");
+            var sesiones = new Proyecto_POE.Datos.GestionSesiones.SesionDAO().ObtenerPorAsignatura(asignatura.IdAsignatura);
+            if (sesiones.Count == 0)
+            {
+                lstHorarios.Items.Add("📅 No hay sesiones programadas para esta asignatura.");
+            }
+            else
+            {
+                foreach (var s in sesiones)
+                {
+                    lstHorarios.Items.Add($"📅 {s.Fecha.ToString("dd/MM/yyyy")} | 🕒 {s.HoraInicio:hh\\:mm} - {s.HoraFin:hh\\:mm} | 📍 {s.Ubicacion} (Tutor: {s.TutorNombre})");
+                }
+            }
 
-            // Recursos
+            // Recursos / Actividades
             lstRecursos.Items.Clear();
-            lstRecursos.Items.Add("🔗 Recursos bibliograficos en la plataforma virtual.");
+            var actividades = _actividadesManager.ListarActividadesPorAsignatura(asignatura.IdAsignatura);
+            if (actividades.Count == 0)
+            {
+                lstRecursos.Items.Add("📝 No hay actividades o recursos registrados para esta asignatura.");
+            }
+            else
+            {
+                foreach (var act in actividades)
+                {
+                    lstRecursos.Items.Add($"📝 {act.Titulo} - {act.Descripcion} (Vence: {act.FechaVencimiento?.ToString("dd/MM/yyyy") ?? "Sin límite"})");
+                }
+            }
         }
 
         private void lstRecursos_DoubleClick(object sender, EventArgs e)
@@ -109,12 +138,18 @@ namespace Proyecto_POE.Presentacion
             tabla.Columns.Add("Descripcion");
             tabla.Columns.Add("Fecha de Vencimiento");
 
+            List<Actividad> actividades;
             if (idAsignatura.HasValue)
             {
-                var actividades = _actividadesManager.ListarActividadesPorAsignatura(idAsignatura.Value);
-                foreach (var act in actividades)
-                    tabla.Rows.Add(act.Titulo, act.Descripcion, act.FechaVencimiento?.ToString("dd/MM/yyyy") ?? "Sin limite");
+                actividades = _actividadesManager.ListarActividadesPorAsignatura(idAsignatura.Value);
             }
+            else
+            {
+                actividades = _actividadesManager.ListarTodas();
+            }
+
+            foreach (var act in actividades)
+                tabla.Rows.Add(act.Titulo, act.Descripcion, act.FechaVencimiento?.ToString("dd/MM/yyyy") ?? "Sin limite");
             
             dgvCalendario.DataSource = tabla;
             dgvCalendario.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -196,20 +231,44 @@ namespace Proyecto_POE.Presentacion
 
         private void ActualizarTutorDelMes()
         {
-            lblTutorDelMesNombre.Text = "Proximamente";
-            lblTutorDelMesEspecialidad.Text = "";
-            lblTutorDelMesPromedio.Text = "";
+            var data = new Proyecto_POE.Datos.TutorDAO().ObtenerTutorDelMes();
+            if (data != null)
+            {
+                lblTutorDelMesNombre.Text = $"{data.Item1.Nombres} {data.Item1.Apellidos}";
+                lblTutorDelMesEspecialidad.Text = data.Item1.Especialidad;
+                lblTutorDelMesPromedio.Text = $"⭐ {data.Item2:F1}";
+            }
+            else
+            {
+                lblTutorDelMesNombre.Text = "Aún sin calificaciones";
+                lblTutorDelMesEspecialidad.Text = "";
+                lblTutorDelMesPromedio.Text = "⭐ 0.0";
+            }
         }
 
         private void btnEnviarComentario_Click(object sender, EventArgs e)
         {
-            int idSesion = 1; 
-            
+            string nombre = txtNombreEstudiante.Text.Trim();
+            if (string.IsNullOrWhiteSpace(nombre))
+            {
+                MessageBox.Show("Por favor, ingrese su nombre.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
+                var estudiante = new Proyecto_POE.Datos.EstudianteDAO().ObtenerOCrearPorNombre(nombre);
+                int idAsignatura = 0;
+                if (cmbGrupoComentario.SelectedItem is Asignatura a)
+                {
+                    idAsignatura = a.IdAsignatura;
+                }
+
+                int idSesion = new Proyecto_POE.Datos.GestionSesiones.SesionDAO().ObtenerOCrearSesionParaAsignatura(idAsignatura);
+
                 var f = new Feedback
                 {
-                    IdEstudiante = 1,
+                    IdEstudiante = estudiante.IdEstudiante,
                     IdSesion = idSesion,
                     Calificacion = 5,
                     Comentarios = txtComentario.Text,
@@ -218,18 +277,26 @@ namespace Proyecto_POE.Presentacion
                 };
 
                 _feedbackManager.RegistrarFeedback(f);
-                MessageBox.Show("✅ Comentario enviado. Gracias por tu feedback!", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("✅ Comentario enviado. Gracias por tu feedback!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtNombreEstudiante.Clear();
                 txtComentario.Clear();
+                ActualizarTutorDelMes();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error de Validacion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
         private void btnVotar_Click(object sender, EventArgs e)
         {
+            string nombre = txtNombreEstudiante.Text.Trim();
+            if (string.IsNullOrWhiteSpace(nombre))
+            {
+                MessageBox.Show("Por favor, ingrese su nombre para registrar el voto en la pestaña de comentarios.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (cmbTutoresVoto.SelectedItem is not Tutor tutor)
             {
                 MessageBox.Show("Seleccione un tutor.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -251,12 +318,15 @@ namespace Proyecto_POE.Presentacion
 
             try
             {
+                var estudiante = new Proyecto_POE.Datos.EstudianteDAO().ObtenerOCrearPorNombre(nombre);
+                int idSesion = new Proyecto_POE.Datos.GestionSesiones.SesionDAO().ObtenerOCrearSesionParaTutor(tutor.IdTutor);
+
                 var f = new Feedback
                 {
-                    IdEstudiante = 1,
-                    IdSesion = 1, 
+                    IdEstudiante = estudiante.IdEstudiante,
+                    IdSesion = idSesion, 
                     Calificacion = estrellas,
-                    Comentarios = "Votacion directa al tutor",
+                    Comentarios = $"Votación directa al tutor {tutor.Nombres} {tutor.Apellidos}",
                     FechaRegistro = DateTime.Now,
                     Activo = true
                 };
