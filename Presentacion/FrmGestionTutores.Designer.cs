@@ -17,6 +17,8 @@ namespace Proyecto_POE.Presentacion
             this.txtApellidos = new System.Windows.Forms.TextBox();
             this.txtEspecialidad = new System.Windows.Forms.TextBox();
             this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.picFoto = new System.Windows.Forms.PictureBox();
             this.btnCargarFoto = new System.Windows.Forms.Button();
             this.lbl1 = new System.Windows.Forms.Label();
@@ -64,6 +66,26 @@ namespace Proyecto_POE.Presentacion
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Location = new System.Drawing.Point(102, 160);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminar.TabIndex = 10;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(192, 160);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiar.TabIndex = 11;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // picFoto
             // 
@@ -121,6 +143,8 @@ namespace Proyecto_POE.Presentacion
             this.Controls.Add(this.btnCargarFoto);
             this.Controls.Add(this.picFoto);
             this.Controls.Add(this.btnGuardar);
+            this.Controls.Add(this.btnEliminar);
+            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.txtEspecialidad);
             this.Controls.Add(this.txtApellidos);
             this.Controls.Add(this.txtNombres);
@@ -140,6 +164,8 @@ namespace Proyecto_POE.Presentacion
         private System.Windows.Forms.TextBox txtApellidos;
         private System.Windows.Forms.TextBox txtEspecialidad;
         private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.PictureBox picFoto;
         private System.Windows.Forms.Button btnCargarFoto;
         private System.Windows.Forms.Label lbl1;

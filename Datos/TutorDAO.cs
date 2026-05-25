@@ -120,5 +120,36 @@ namespace Proyecto_POE.Datos
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
+
+        public bool Actualizar(Tutor tutor)
+        {
+            using (SqlConnection conn = _conexion.LeerConexion())
+            {
+                string query = "UPDATE Tutores SET Nombres = @Nombres, Apellidos = @Apellidos, Especialidad = @Especialidad, FotoRuta = @FotoRuta " +
+                               "WHERE IdTutor = @IdTutor";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Nombres", tutor.Nombres ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Apellidos", tutor.Apellidos ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Especialidad", tutor.Especialidad ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@FotoRuta", tutor.FotoRuta ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@IdTutor", tutor.IdTutor);
+
+                conn.Open();
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+
+        public bool Eliminar(int idTutor)
+        {
+            using (SqlConnection conn = _conexion.LeerConexion())
+            {
+                string query = "UPDATE Tutores SET Activo = 0 WHERE IdTutor = @IdTutor";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@IdTutor", idTutor);
+
+                conn.Open();
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
     }
 }

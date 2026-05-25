@@ -21,5 +21,21 @@ namespace Proyecto_POE.Negocio
             
             return _tutorDAO.Insertar(tutor);
         }
+
+        public bool ModificarTutor(Tutor tutor)
+        {
+            if (string.IsNullOrWhiteSpace(tutor.Nombres) || string.IsNullOrWhiteSpace(tutor.Apellidos))
+                throw new ArgumentException("El nombre y el apellido del tutor son obligatorios.");
+            
+            return _tutorDAO.Actualizar(tutor);
+        }
+
+        public bool EliminarTutor(int idTutor)
+        {
+            if (idTutor <= 0)
+                throw new ArgumentException("El ID del tutor debe ser válido.");
+            
+            return _tutorDAO.Eliminar(idTutor);
+        }
     }
 }
