@@ -373,8 +373,16 @@ namespace Proyecto_POE.Presentacion
             // 
             // tabFeedback
             // 
-            this.tabFeedback.Controls.Add(this.groupBoxVotacion);
-            this.tabFeedback.Controls.Add(this.groupBoxComentario);
+            System.Windows.Forms.TableLayoutPanel tlpFeedback = new System.Windows.Forms.TableLayoutPanel();
+            tlpFeedback.Dock = System.Windows.Forms.DockStyle.Fill;
+            tlpFeedback.ColumnCount = 2;
+            tlpFeedback.RowCount = 1;
+            tlpFeedback.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tlpFeedback.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tlpFeedback.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tlpFeedback.Controls.Add(this.groupBoxComentario, 0, 0);
+            tlpFeedback.Controls.Add(this.groupBoxVotacion, 1, 0);
+            this.tabFeedback.Controls.Add(tlpFeedback);
             this.tabFeedback.Location = new System.Drawing.Point(4, 26);
             this.tabFeedback.Name = "tabFeedback";
             this.tabFeedback.Size = new System.Drawing.Size(976, 531);
@@ -396,9 +404,10 @@ namespace Proyecto_POE.Presentacion
             this.groupBoxVotacion.Controls.Add(this.rb1Estrella);
             this.groupBoxVotacion.Controls.Add(this.cmbTutoresVoto);
             this.groupBoxVotacion.Controls.Add(this.lblVotarTutor);
-            this.groupBoxVotacion.Location = new System.Drawing.Point(487, 26);
+            this.groupBoxVotacion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxVotacion.Location = new System.Drawing.Point(491, 3);
             this.groupBoxVotacion.Name = "groupBoxVotacion";
-            this.groupBoxVotacion.Size = new System.Drawing.Size(465, 477);
+            this.groupBoxVotacion.Size = new System.Drawing.Size(482, 525);
             this.groupBoxVotacion.TabIndex = 1;
             this.groupBoxVotacion.TabStop = false;
             this.groupBoxVotacion.Text = "Valoracion al Tutor";
@@ -512,6 +521,8 @@ namespace Proyecto_POE.Presentacion
             // 
             // cmbTutoresVoto
             // 
+            this.cmbTutoresVoto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbTutoresVoto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTutoresVoto.FormattingEnabled = true;
             this.cmbTutoresVoto.Location = new System.Drawing.Point(125, 33);
@@ -537,18 +548,20 @@ namespace Proyecto_POE.Presentacion
             this.groupBoxComentario.Controls.Add(this.lblGrupoComentario);
             this.groupBoxComentario.Controls.Add(this.txtNombreEstudiante);
             this.groupBoxComentario.Controls.Add(this.lblNombreEstudiante);
-            this.groupBoxComentario.Location = new System.Drawing.Point(21, 26);
+            this.groupBoxComentario.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxComentario.Location = new System.Drawing.Point(3, 3);
             this.groupBoxComentario.Name = "groupBoxComentario";
-            this.groupBoxComentario.Size = new System.Drawing.Size(437, 477);
+            this.groupBoxComentario.Size = new System.Drawing.Size(482, 525);
             this.groupBoxComentario.TabIndex = 0;
             this.groupBoxComentario.TabStop = false;
             this.groupBoxComentario.Text = "Dejar un Comentario o Sugerencia";
             // 
             // btnEnviarComentario
             // 
+            this.btnEnviarComentario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEnviarComentario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.btnEnviarComentario.ForeColor = System.Drawing.Color.White;
-            this.btnEnviarComentario.Location = new System.Drawing.Point(24, 381);
+            this.btnEnviarComentario.Location = new System.Drawing.Point(24, 429);
             this.btnEnviarComentario.Name = "btnEnviarComentario";
             this.btnEnviarComentario.Size = new System.Drawing.Size(150, 40);
             this.btnEnviarComentario.TabIndex = 6;
@@ -558,10 +571,13 @@ namespace Proyecto_POE.Presentacion
             // 
             // txtComentario
             // 
+            this.txtComentario.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtComentario.Location = new System.Drawing.Point(24, 155);
             this.txtComentario.Multiline = true;
             this.txtComentario.Name = "txtComentario";
-            this.txtComentario.Size = new System.Drawing.Size(390, 207);
+            this.txtComentario.Size = new System.Drawing.Size(435, 255);
             this.txtComentario.TabIndex = 5;
             // 
             // lblComentario
@@ -575,6 +591,8 @@ namespace Proyecto_POE.Presentacion
             // 
             // cmbGrupoComentario
             // 
+            this.cmbGrupoComentario.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbGrupoComentario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGrupoComentario.FormattingEnabled = true;
             this.cmbGrupoComentario.Location = new System.Drawing.Point(94, 85);
@@ -593,6 +611,8 @@ namespace Proyecto_POE.Presentacion
             // 
             // txtNombreEstudiante
             // 
+            this.txtNombreEstudiante.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNombreEstudiante.Location = new System.Drawing.Point(94, 40);
             this.txtNombreEstudiante.Name = "txtNombreEstudiante";
             this.txtNombreEstudiante.Size = new System.Drawing.Size(320, 25);

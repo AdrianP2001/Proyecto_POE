@@ -1,4 +1,4 @@
-﻿namespace Proyecto_POE.Presentacion.GestionMaterias
+namespace Proyecto_POE.Presentacion.GestionMaterias
 {
     partial class FrmGestionMaterias
     {
@@ -260,6 +260,7 @@
             // 
             // listBox1
             // 
+            listBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             listBox1.Font = new Font("Segoe UI", 9F);
             listBox1.FormattingEnabled = true;
             listBox1.Location = new Point(515, 315);
@@ -292,6 +293,7 @@
             // 
             // lblLista
             // 
+            lblLista.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblLista.AutoSize = true;
             lblLista.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
             lblLista.ForeColor = Color.MidnightBlue;
@@ -352,6 +354,7 @@
             // 
             // dgvMaterias
             // 
+            dgvMaterias.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvMaterias.AllowUserToAddRows = false;
             dgvMaterias.AllowUserToDeleteRows = false;
             dgvMaterias.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -426,8 +429,8 @@
             Controls.Add(pnlMain);
             Controls.Add(pnlSidebar);
             Font = new Font("Segoe UI", 9F);
-            FormBorderStyle = FormBorderStyle.FixedDialog;
-            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.Sizable;
+            MaximizeBox = true;
             Name = "FrmGestionMaterias";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Gestión de Células de Estudio";

@@ -30,6 +30,9 @@ namespace Proyecto_POE.Presentacion
             // 
             // dgvTutores
             // 
+            this.dgvTutores.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTutores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTutores.Location = new System.Drawing.Point(12, 197);
             this.dgvTutores.Name = "dgvTutores";
@@ -89,6 +92,7 @@ namespace Proyecto_POE.Presentacion
             // 
             // picFoto
             // 
+            this.picFoto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.picFoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picFoto.Location = new System.Drawing.Point(422, 12);
             this.picFoto.Name = "picFoto";
@@ -99,6 +103,7 @@ namespace Proyecto_POE.Presentacion
             // 
             // btnCargarFoto
             // 
+            this.btnCargarFoto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCargarFoto.Location = new System.Drawing.Point(422, 168);
             this.btnCargarFoto.Name = "btnCargarFoto";
             this.btnCargarFoto.Size = new System.Drawing.Size(150, 23);

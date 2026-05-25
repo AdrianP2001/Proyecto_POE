@@ -28,6 +28,9 @@ namespace Proyecto_POE.Presentacion.ResultadosGestion
             // 
             // dgvResultados
             // 
+            this.dgvResultados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvResultados.AllowUserToAddRows = false;
             this.dgvResultados.AllowUserToDeleteRows = false;
             this.dgvResultados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -41,6 +44,7 @@ namespace Proyecto_POE.Presentacion.ResultadosGestion
             // 
             // btnExportarPDF
             // 
+            this.btnExportarPDF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnExportarPDF.BackColor = System.Drawing.Color.SteelBlue;
             this.btnExportarPDF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExportarPDF.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
@@ -55,6 +59,7 @@ namespace Proyecto_POE.Presentacion.ResultadosGestion
             // 
             // btnActualizar
             // 
+            this.btnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnActualizar.Location = new System.Drawing.Point(650, 380);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(100, 45);
