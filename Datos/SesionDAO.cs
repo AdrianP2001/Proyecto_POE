@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using Proyecto_POE.Datos;
-using Proyecto_POE.Entidades.GestionSesiones;
+using Proyecto_POE.Entidades;
 
-namespace Proyecto_POE.Datos.GestionSesiones
+namespace Proyecto_POE.Datos
 {
     public class SesionDAO
     {

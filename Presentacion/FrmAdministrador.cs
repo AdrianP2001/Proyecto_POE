@@ -1,9 +1,6 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Proyecto_POE.Presentacion.GestionSesiones;
-using Proyecto_POE.Presentacion.ResultadosGestion;
-using Proyecto_POE.Presentacion.GestionMaterias;
 
 namespace Proyecto_POE.Presentacion
 {

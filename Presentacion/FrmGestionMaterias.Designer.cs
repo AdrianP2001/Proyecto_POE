@@ -1,4 +1,4 @@
-namespace Proyecto_POE.Presentacion.GestionMaterias
+namespace Proyecto_POE.Presentacion
 {
     partial class FrmGestionMaterias
     {

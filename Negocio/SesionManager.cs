@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Proyecto_POE.Datos.GestionSesiones;
-using Proyecto_POE.Entidades.GestionSesiones;
+using Proyecto_POE.Datos;
+using Proyecto_POE.Entidades;
 
-namespace Proyecto_POE.Negocio.GestionSesiones
+namespace Proyecto_POE.Negocio
 {
     /// <summary>
     /// Arquitecto Senior: Clase encargada de orquestar la lógica de negocio para las Sesiones.

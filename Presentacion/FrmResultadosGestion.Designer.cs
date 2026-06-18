@@ -1,4 +1,4 @@
-namespace Proyecto_POE.Presentacion.ResultadosGestion
+namespace Proyecto_POE.Presentacion
 {
     partial class FrmResultadosGestion
     {

@@ -1,9 +1,9 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Proyecto_POE.Negocio.ResultadosGestion;
+using Proyecto_POE.Negocio;
 
-namespace Proyecto_POE.Presentacion.ResultadosGestion
+namespace Proyecto_POE.Presentacion
 {
     public partial class FrmResultadosGestion : Form
     {

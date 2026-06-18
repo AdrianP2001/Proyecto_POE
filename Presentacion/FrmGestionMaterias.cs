@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using Proyecto_POE.Entidades;
 using Proyecto_POE.Datos;
 
-namespace Proyecto_POE.Presentacion.GestionMaterias
+namespace Proyecto_POE.Presentacion
 {
     public partial class FrmGestionMaterias : Form
     {

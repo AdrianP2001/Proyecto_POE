@@ -1,6 +1,6 @@
 using System;
 
-namespace Proyecto_POE.Entidades.ResultadosGestion
+namespace Proyecto_POE.Entidades
 {
     /// <summary>
     /// Representa los métricas de impacto por asignatura.

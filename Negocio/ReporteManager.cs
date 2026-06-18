@@ -5,10 +5,10 @@ using iText.Layout.Element;
 using iText.Layout.Properties;
 using iText.Kernel.Geom;
 using iText.Kernel.Colors;
-using Proyecto_POE.Datos.ResultadosGestion;
-using Proyecto_POE.Entidades.ResultadosGestion;
+using Proyecto_POE.Datos;
+using Proyecto_POE.Entidades;
 
-namespace Proyecto_POE.Negocio.ResultadosGestion
+namespace Proyecto_POE.Negocio
 {
     public class ReporteManager
     {

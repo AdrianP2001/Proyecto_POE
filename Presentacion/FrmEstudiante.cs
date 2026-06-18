@@ -71,7 +71,7 @@ namespace Proyecto_POE.Presentacion
 
             // Horarios y Sesiones
             lstHorarios.Items.Clear();
-            var sesiones = new Proyecto_POE.Datos.GestionSesiones.SesionDAO().ObtenerPorAsignatura(asignatura.IdAsignatura);
+            var sesiones = new Proyecto_POE.Datos.SesionDAO().ObtenerPorAsignatura(asignatura.IdAsignatura);
             if (sesiones.Count == 0)
             {
                 lstHorarios.Items.Add("📅 No hay sesiones programadas para esta asignatura.");
@@ -264,7 +264,7 @@ namespace Proyecto_POE.Presentacion
                     idAsignatura = a.IdAsignatura;
                 }
 
-                int idSesion = new Proyecto_POE.Datos.GestionSesiones.SesionDAO().ObtenerOCrearSesionParaAsignatura(idAsignatura);
+                int idSesion = new Proyecto_POE.Datos.SesionDAO().ObtenerOCrearSesionParaAsignatura(idAsignatura);
 
                 var f = new Feedback
                 {
@@ -319,7 +319,7 @@ namespace Proyecto_POE.Presentacion
             try
             {
                 var estudiante = new Proyecto_POE.Datos.EstudianteDAO().ObtenerOCrearPorNombre(nombre);
-                int idSesion = new Proyecto_POE.Datos.GestionSesiones.SesionDAO().ObtenerOCrearSesionParaTutor(tutor.IdTutor);
+                int idSesion = new Proyecto_POE.Datos.SesionDAO().ObtenerOCrearSesionParaTutor(tutor.IdTutor);
 
                 var f = new Feedback
                 {
