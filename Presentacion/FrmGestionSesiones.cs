@@ -17,6 +17,7 @@ namespace Proyecto_POE.Presentacion
         private void FrmGestionSesiones_Load(object sender, EventArgs e)
         {
             CargarDatos();
+            CargarComboboxes();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -26,7 +27,9 @@ namespace Proyecto_POE.Presentacion
                 Fecha = dtpFecha.Value,
                 HoraInicio = dtpInicio.Value.TimeOfDay,
                 HoraFin = dtpFin.Value.TimeOfDay,
-                Ubicacion = txtUbicacion.Text
+                Ubicacion = txtUbicacion.Text,
+                IdAsignatura = cmbAsignatura.SelectedValue != null ? (int?)Convert.ToInt32(cmbAsignatura.SelectedValue) : null,
+                IdTutor = cmbTutor.SelectedValue != null ? (int?)Convert.ToInt32(cmbTutor.SelectedValue) : null
             };
 
             string rpta = manager.ProcesarRegistro(nueva);
@@ -60,10 +63,41 @@ namespace Proyecto_POE.Presentacion
                 dgvSesiones.Columns["ID"].Visible = false;
         }
 
+        private void CargarComboboxes()
+        {
+            try
+            {
+                var gestorAsig = new GestorAsignaturas();
+                var asignaturas = gestorAsig.ListarAsignaturas();
+                cmbAsignatura.DataSource = asignaturas;
+                cmbAsignatura.DisplayMember = "Nombre";
+                cmbAsignatura.ValueMember = "IdAsignatura";
+
+                var gestorTutor = new GestorTutorias();
+                var tutores = gestorTutor.ListarTutores();
+                
+                var tutoresDisplay = new System.Collections.Generic.List<object>();
+                foreach (var t in tutores)
+                {
+                    tutoresDisplay.Add(new { IdTutor = t.IdTutor, NombreCompleto = $"{t.Nombres} {t.Apellidos}" });
+                }
+                
+                cmbTutor.DataSource = tutoresDisplay;
+                cmbTutor.DisplayMember = "NombreCompleto";
+                cmbTutor.ValueMember = "IdTutor";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar asignaturas o tutores: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void LimpiarFormulario()
         {
             txtUbicacion.Clear();
             dtpFecha.Value = DateTime.Now;
+            if (cmbAsignatura.Items.Count > 0) cmbAsignatura.SelectedIndex = 0;
+            if (cmbTutor.Items.Count > 0) cmbTutor.SelectedIndex = 0;
         }
     }
 }

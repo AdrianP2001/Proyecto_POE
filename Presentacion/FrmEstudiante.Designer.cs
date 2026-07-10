@@ -521,13 +521,11 @@ namespace Proyecto_POE.Presentacion
             // 
             // cmbTutoresVoto
             // 
-            this.cmbTutoresVoto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbTutoresVoto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTutoresVoto.FormattingEnabled = true;
             this.cmbTutoresVoto.Location = new System.Drawing.Point(125, 33);
             this.cmbTutoresVoto.Name = "cmbTutoresVoto";
-            this.cmbTutoresVoto.Size = new System.Drawing.Size(300, 25);
+            this.cmbTutoresVoto.Size = new System.Drawing.Size(250, 25);
             this.cmbTutoresVoto.TabIndex = 1;
             // 
             // lblVotarTutor
@@ -591,13 +589,11 @@ namespace Proyecto_POE.Presentacion
             // 
             // cmbGrupoComentario
             // 
-            this.cmbGrupoComentario.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbGrupoComentario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGrupoComentario.FormattingEnabled = true;
             this.cmbGrupoComentario.Location = new System.Drawing.Point(94, 85);
             this.cmbGrupoComentario.Name = "cmbGrupoComentario";
-            this.cmbGrupoComentario.Size = new System.Drawing.Size(320, 25);
+            this.cmbGrupoComentario.Size = new System.Drawing.Size(250, 25);
             this.cmbGrupoComentario.TabIndex = 3;
             // 
             // lblGrupoComentario
@@ -611,11 +607,9 @@ namespace Proyecto_POE.Presentacion
             // 
             // txtNombreEstudiante
             // 
-            this.txtNombreEstudiante.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNombreEstudiante.Location = new System.Drawing.Point(94, 40);
             this.txtNombreEstudiante.Name = "txtNombreEstudiante";
-            this.txtNombreEstudiante.Size = new System.Drawing.Size(320, 25);
+            this.txtNombreEstudiante.Size = new System.Drawing.Size(250, 25);
             this.txtNombreEstudiante.TabIndex = 1;
             // 
             // lblNombreEstudiante

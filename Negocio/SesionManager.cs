@@ -26,6 +26,12 @@ namespace Proyecto_POE.Negocio
             if (nueva.Fecha.Date < DateTime.Now.Date)
                 return "Error: No se pueden programar sesiones en fechas pasadas.";
 
+            if (!nueva.IdAsignatura.HasValue || nueva.IdAsignatura.Value <= 0)
+                return "Error: Debe seleccionar una asignatura válida.";
+
+            if (!nueva.IdTutor.HasValue || nueva.IdTutor.Value <= 0)
+                return "Error: Debe seleccionar un tutor válido.";
+
             try 
             {
                 var sesionesExistentes = dao.Listar();

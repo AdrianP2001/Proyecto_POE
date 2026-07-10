@@ -25,6 +25,10 @@ namespace Proyecto_POE.Presentacion
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
+            cmbAsignatura = new ComboBox();
+            cmbTutor = new ComboBox();
+            lblAsignatura = new Label();
+            lblTutor = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvSesiones).BeginInit();
             SuspendLayout();
             // 
@@ -127,11 +131,50 @@ namespace Proyecto_POE.Presentacion
             label4.TabIndex = 9;
             label4.Text = "Ubicación / Enlace Virtual:";
             // 
+            // 
+            // cmbAsignatura
+            // 
+            cmbAsignatura.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbAsignatura.Location = new Point(430, 35);
+            cmbAsignatura.Name = "cmbAsignatura";
+            cmbAsignatura.Size = new Size(230, 23);
+            cmbAsignatura.TabIndex = 10;
+            // 
+            // cmbTutor
+            // 
+            cmbTutor.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbTutor.Location = new Point(430, 75);
+            cmbTutor.Name = "cmbTutor";
+            cmbTutor.Size = new Size(230, 23);
+            cmbTutor.TabIndex = 11;
+            // 
+            // lblAsignatura
+            // 
+            lblAsignatura.AutoSize = true;
+            lblAsignatura.Location = new Point(320, 40);
+            lblAsignatura.Name = "lblAsignatura";
+            lblAsignatura.Size = new Size(67, 15);
+            lblAsignatura.TabIndex = 12;
+            lblAsignatura.Text = "Asignatura:";
+            // 
+            // lblTutor
+            // 
+            lblTutor.AutoSize = true;
+            lblTutor.Location = new Point(320, 81);
+            lblTutor.Name = "lblTutor";
+            lblTutor.Size = new Size(38, 15);
+            lblTutor.TabIndex = 13;
+            lblTutor.Text = "Tutor:";
+            // 
             // FrmGestionSesiones
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(700, 496);
+            Controls.Add(lblAsignatura);
+            Controls.Add(lblTutor);
+            Controls.Add(cmbAsignatura);
+            Controls.Add(cmbTutor);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -162,5 +205,9 @@ namespace Proyecto_POE.Presentacion
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cmbAsignatura;
+        private System.Windows.Forms.ComboBox cmbTutor;
+        private System.Windows.Forms.Label lblAsignatura;
+        private System.Windows.Forms.Label lblTutor;
     }
 }
