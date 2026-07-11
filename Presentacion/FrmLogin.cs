@@ -160,7 +160,6 @@ namespace Proyecto_POE.Presentacion
                     // Ingreso Admin
                     this.Hide();
                     var frmMenu = new FrmMenuPrincipal();
-                    frmMenu.FormClosed += (s, args) => this.Close();
                     frmMenu.Show();
                 }
                 else
