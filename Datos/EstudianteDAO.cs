@@ -37,6 +37,34 @@ namespace Proyecto_POE.Datos
             return est;
         }
 
+        public Estudiante ObtenerPorMatricula(string matricula)
+        {
+            Estudiante est = null;
+            using (SqlConnection conn = _conexion.LeerConexion())
+            {
+                string query = "SELECT IdEstudiante, Matricula, Nombres, Apellidos, Email, Activo FROM Estudiantes WHERE Matricula = @Matricula AND Activo = 1";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Matricula", matricula);
+                conn.Open();
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        est = new Estudiante
+                        {
+                            IdEstudiante = Convert.ToInt32(reader["IdEstudiante"]),
+                            Matricula = reader["Matricula"].ToString(),
+                            Nombres = reader["Nombres"].ToString(),
+                            Apellidos = reader["Apellidos"].ToString(),
+                            Email = reader["Email"]?.ToString() ?? string.Empty,
+                            Activo = Convert.ToBoolean(reader["Activo"])
+                        };
+                    }
+                }
+            }
+            return est;
+        }
+
         public Estudiante ObtenerOCrearPorNombre(string nombreCompleto)
         {
             if (string.IsNullOrWhiteSpace(nombreCompleto))

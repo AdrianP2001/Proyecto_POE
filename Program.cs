@@ -43,7 +43,7 @@ namespace Proyecto_POE
                 }
             }
 
-            Application.Run(new FrmMenuPrincipal());
+            Application.Run(new FrmLogin());
         }
     }
 }

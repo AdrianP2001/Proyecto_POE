@@ -17,6 +17,8 @@ namespace Proyecto_POE.Presentacion
         private readonly GestorFeedback _feedbackManager = new GestorFeedback();
         private readonly GestorTutorias _tutoriasManager = new GestorTutorias();
 
+        public Estudiante? EstudianteActual { get; set; }
+
         public FrmEstudiante()
         {
             InitializeComponent();
@@ -28,6 +30,12 @@ namespace Proyecto_POE.Presentacion
             CargarCalendario();
             CargarGaleria();
             CargarFeedback();
+
+            if (EstudianteActual != null)
+            {
+                txtNombreEstudiante.Text = $"{EstudianteActual.Nombres} {EstudianteActual.Apellidos}";
+                txtNombreEstudiante.ReadOnly = true;
+            }
         }
 
         // ============================================================
